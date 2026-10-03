@@ -1,5 +1,5 @@
 # Navithya Lanka - Verified Home Services Web Portal 🛠️
-> Inspired by [GetItDone.lk](https://getitdone.lk/) | Sri Lanka's Verified Skilled Tradesmen & Contractor Platform
+> Inspired by  | Sri Lanka's Verified Skilled Tradesmen & Contractor Platform
 
 A complete, self-contained **Single HTML File (`index.html`)** web portal with **Customer Booking & Tracking**, **Ratings & Customer Reviews**, **Sri Lanka & World News Feed**, **Complaints & Dispute Resolution Desk**, **Provider Registration with 2-Month Free Trial & Custom Company Branding**, **Payment Gateway Integration (Weekly / Monthly / Yearly)**, and an **Administrator Panel** with **Firebase (Project: `navithya-ca0e7`)**.
 
