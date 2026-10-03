@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "44611390829",
+    "project_id": "navithya-ca0e7",
+    "storage_bucket": "navithya-ca0e7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:44611390829:android:9ad02e2e88a400d7101e64",
+        "android_client_info": {
+          "package_name": "com.navithya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpOF0JDsdf3_i9wpO4ft6CxPMSpjJAIvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

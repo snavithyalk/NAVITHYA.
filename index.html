@@ -1,0 +1,3349 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navithya | Sri Lanka's Verified Tradesmen, News, Ratings & Service Portal</title>
+  <meta name="description" content="Sri Lanka's trust-first platform for verified electricians, plumbers, AC technicians, ratings, complaints resolution, and local & world news.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Sinhala:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans Sinhala"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Sinhala', sans-serif;
+    }
+    .badge-verified {
+      background: #ecfdf5;
+      color: #047857;
+      border: 1px solid #a7f3d0;
+    }
+    .badge-pending {
+      background: #fffbeb;
+      color: #b45309;
+      border: 1px solid #fde68a;
+    }
+    .badge-trial {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+    .badge-active {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #86efac;
+    }
+    .badge-banned {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #f87171;
+    }
+    .glass-nav {
+      backdrop-filter: blur(12px);
+      background-color: rgba(255, 255, 255, 0.96);
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col antialiased">
+
+  <!-- ================= TOP NOTIFICATION BANNER ================= -->
+  <div class="bg-blue-950 text-blue-100 text-xs py-2 px-4 font-medium border-b border-blue-900/60">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span data-i18n="topBanner">Official Hotlines: <strong>0719929453</strong> / <strong>0729929453</strong></span>
+        <span class="text-blue-400 hidden sm:inline">|</span>
+        <span class="hidden sm:inline">Email: <a href="mailto:snavithya@gmail.com" class="text-blue-300 hover:underline">snavithya@gmail.com</a></span>
+      </div>
+      
+      <div class="flex items-center gap-3 text-[11px]">
+        <a href="https://wa.me/94719929453?text=Hello%20Navithya%20LK,%20I%20need%20assistance%20with%20a%20home%20service" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1 rounded-full flex items-center gap-1.5 transition-all shadow-sm">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp: 0719929453
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CLEAN MAIN HEADER / NAVBAR ================= -->
+  <header class="sticky top-0 z-40 glass-nav border-b border-gray-200/80 shadow-sm transition-all duration-200">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      
+      <!-- BRAND LOGO / DYNAMIC COMPANY BRANDING -->
+      <a href="#home" onclick="switchView('home')" class="flex items-center gap-2.5 group cursor-pointer">
+        <div id="headerBrandIcon" class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+          <i data-lucide="wrench" class="w-5 h-5"></i>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span id="headerBrandName" class="text-xl font-black text-gray-900 tracking-tight">Navithya</span>
+            <span id="headerBrandTag" class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-100 text-blue-700">LK</span>
+          </div>
+          <span id="headerBrandSub" class="text-[10px] text-gray-500 font-semibold tracking-wider -mt-1 uppercase">Verified Trades & Services</span>
+        </div>
+      </a>
+
+      <!-- CLEAN PUBLIC DESKTOP NAVIGATION -->
+      <nav class="hidden md:flex items-center gap-6">
+        <button onclick="switchView('home')" class="nav-link text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors" data-i18n="navHome">Home</button>
+        <button onclick="switchView('services')" class="nav-link text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors" data-i18n="navServices">Services</button>
+        <button onclick="switchView('reviews')" class="nav-link text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors flex items-center gap-1">
+          <i data-lucide="star" class="w-4 h-4 text-amber-500 fill-amber-400"></i>
+          <span data-i18n="navReviews">Ratings & Reviews</span>
+        </button>
+        <button onclick="switchView('news')" class="nav-link text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors flex items-center gap-1">
+          <i data-lucide="newspaper" class="w-4 h-4 text-blue-600"></i>
+          <span data-i18n="navNews">SL & World News</span>
+        </button>
+        <button onclick="switchView('complaints')" class="nav-link text-sm font-semibold text-gray-700 hover:text-blue-600 transition-colors flex items-center gap-1">
+          <i data-lucide="alert-circle" class="w-4 h-4 text-rose-500"></i>
+          <span data-i18n="navComplaints">Complaints & Help</span>
+        </button>
+      </nav>
+
+      <!-- RIGHT ACTIONS -->
+      <div class="flex items-center gap-3">
+        <div class="inline-flex items-center gap-1 text-xs font-bold select-none px-2 py-1 bg-gray-100 border border-gray-200 rounded-full">
+          <button id="langEnBtn" onclick="setLanguage('en')" class="px-2 py-0.5 rounded-full bg-white text-blue-700 shadow-sm font-extrabold transition-all">EN</button>
+          <button id="langSiBtn" onclick="setLanguage('si')" class="px-2 py-0.5 rounded-full text-gray-500 font-semibold hover:text-blue-600 transition-all">සිංහල</button>
+        </div>
+
+        <button onclick="openBookingModal()" class="inline-flex items-center justify-center gap-1.5 py-2 px-4 rounded-full font-bold text-xs md:text-sm bg-blue-600 hover:bg-blue-700 text-white shadow-sm hover:shadow-md transition-all">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i>
+          <span data-i18n="btnRequestWorker">Request Worker</span>
+        </button>
+
+        <!-- Discrete Portal Menu Dropdown -->
+        <div class="relative hidden sm:block">
+          <button onclick="toggleUserDropdown()" class="p-2 rounded-xl text-gray-700 hover:bg-gray-100 border border-gray-200 transition-all flex items-center gap-1 text-xs font-bold" title="Account & Portals">
+            <i data-lucide="user" class="w-4 h-4 text-gray-600"></i>
+            <i data-lucide="chevron-down" class="w-3 h-3 text-gray-400"></i>
+          </button>
+          <div id="userDropdownMenu" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-50 text-xs font-semibold">
+            <div class="px-3 py-1.5 text-[10px] uppercase font-black text-gray-400 border-b border-gray-100">Portals & Accounts</div>
+            <button onclick="switchView('customer'); toggleUserDropdown()" class="w-full text-left px-3 py-2 hover:bg-blue-50 hover:text-blue-600 flex items-center gap-2">
+              <i data-lucide="clipboard-list" class="w-4 h-4 text-blue-600"></i> Track My Bookings
+            </button>
+            <button onclick="switchView('worker'); toggleUserDropdown()" class="w-full text-left px-3 py-2 hover:bg-amber-50 hover:text-amber-700 flex items-center gap-2">
+              <i data-lucide="hard-hat" class="w-4 h-4 text-amber-600"></i> Provider & Team Portal
+            </button>
+            <button onclick="switchView('pricing'); toggleUserDropdown()" class="w-full text-left px-3 py-2 hover:bg-emerald-50 hover:text-emerald-700 flex items-center gap-2">
+              <i data-lucide="sparkles" class="w-4 h-4 text-emerald-600"></i> Provider 2-Month Free Trial
+            </button>
+            <div class="border-t border-gray-100 my-1"></div>
+            <button onclick="openAdminModal(); toggleUserDropdown()" class="w-full text-left px-3 py-2 hover:bg-purple-50 text-purple-700 flex items-center gap-2">
+              <i data-lucide="shield" class="w-4 h-4 text-purple-600"></i> Admin Sign In
+            </button>
+          </div>
+        </div>
+
+        <button onclick="toggleMobileMenu()" class="md:hidden text-gray-600 p-2 bg-gray-100 rounded-lg hover:bg-gray-200">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-gray-100 bg-white px-4 py-3 space-y-2 shadow-lg">
+      <button onclick="switchView('home'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded-lg text-sm font-semibold text-gray-800 hover:bg-blue-50">🏠 Home</button>
+      <button onclick="switchView('services'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded-lg text-sm font-semibold text-gray-800 hover:bg-blue-50">🛠️ Services</button>
+      <button onclick="switchView('reviews'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded-lg text-sm font-semibold text-gray-800 hover:bg-blue-50">⭐ Ratings & Reviews</button>
+      <button onclick="switchView('news'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded-lg text-sm font-semibold text-gray-800 hover:bg-blue-50">📰 SL & World News</button>
+      <button onclick="switchView('complaints'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded-lg text-sm font-semibold text-gray-800 hover:bg-blue-50">📢 Complaints & Help</button>
+      <div class="border-t border-gray-100 pt-2 text-xs font-bold text-gray-400">Accounts & Portals</div>
+      <button onclick="switchView('customer'); toggleMobileMenu()" class="block w-full text-left py-1.5 px-3 rounded-lg text-xs font-semibold text-blue-600 hover:bg-blue-50">👤 Customer Portal & Tracking</button>
+      <button onclick="switchView('worker'); toggleMobileMenu()" class="block w-full text-left py-1.5 px-3 rounded-lg text-xs font-semibold text-amber-600 hover:bg-amber-50">👷 Provider & Team Portal (2 Months Free)</button>
+      <button onclick="openAdminModal(); toggleMobileMenu()" class="block w-full text-left py-1.5 px-3 rounded-lg text-xs font-semibold text-purple-700 bg-purple-50">🛡️ Admin Login</button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT VIEWS ================= -->
+  <main class="flex-1">
+
+    <!-- ======================================================== -->
+    <!-- VIEW 1: HOME & MARKETPLACE -->
+    <!-- ======================================================== -->
+    <section id="viewHome" class="portal-view">
+      <section class="bg-gradient-to-b from-blue-50 via-white to-gray-50 pt-12 pb-16 px-4 text-center border-b border-gray-100">
+        <div class="max-w-3xl mx-auto">
+          <div class="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold mb-6 shadow-sm">
+            <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+            <span data-i18n="heroBadge">NIC-Verified Professionals & Providers</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-5xl font-black text-gray-900 leading-tight mb-4 tracking-tight" data-i18n="heroTitle">
+            Trusted Home Service Workers & Companies in Sri Lanka
+          </h1>
+
+          <p class="text-base sm:text-lg text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed" data-i18n="heroDesc">
+            Electricians, plumbers, AC techs and verified contractors — matched via WhatsApp in minutes.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button onclick="openBookingModal()" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-4 px-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-black text-base shadow-lg shadow-blue-500/20 hover:shadow-xl transition-all">
+              <span data-i18n="heroCta">Request a Worker</span>
+              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            </button>
+            <a href="https://wa.me/94719929453?text=Hello%20Navithya%20LK,%20I%20need%20a%20verified%20technician%20or%20service%20provider." target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-4 px-7 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base shadow-md transition-all">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+              <span>WhatsApp Us: 0719929453</span>
+            </a>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-8 text-xs sm:text-sm font-semibold text-gray-600">
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
+              <span data-i18n="trustFree">Free for Customers</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-500"></i>
+              <span data-i18n="trustMatch">Match in ~30 min</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <i data-lucide="gift" class="w-4 h-4 text-blue-500"></i>
+              <span>2 Months Free Provider Trial</span>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES CATEGORIES GRID -->
+      <section id="servicesSection" class="py-14 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-10">
+            <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2" data-i18n="servicesTitle">What do you need help with?</h2>
+            <p class="text-sm sm:text-base text-gray-500" data-i18n="servicesSubtitle">Tap a service to get started with an identity-verified worker</p>
+          </div>
+          <div id="servicesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4"></div>
+        </div>
+      </section>
+
+      <!-- POPULAR REQUESTS QUICK CARDS -->
+      <section class="py-14 px-4 bg-gray-50 border-t border-b border-gray-200">
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-8">
+            <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2" data-i18n="popularTitle">Popular Requests</h2>
+            <p class="text-sm sm:text-base text-gray-500" data-i18n="popularSubtitle">Tap your problem to get help instantly</p>
+          </div>
+          <div id="popularGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5"></div>
+        </div>
+      </section>
+
+      <!-- VERIFIED SERVICE PROVIDERS DIRECTORY (DISTRICT & CATEGORY FILTERED) -->
+      <section id="directorySection" class="py-14 px-4 bg-white border-b border-gray-100">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+              <div class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full mb-2">
+                <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-600"></i> Direct Worker & Company Selection
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-black text-gray-900">Verified Providers in Your District</h2>
+              <p class="text-sm text-gray-500 mt-1">Select a specific verified specialist in your area, or send an instant booking request.</p>
+            </div>
+
+            <!-- Filters for District and Trade -->
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="relative">
+                <select id="dirDistrictFilter" onchange="renderVerifiedDirectory()" class="text-xs font-bold px-3 py-2 border border-gray-300 rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-blue-500 text-gray-800">
+                  <option value="ALL">📍 All Districts (සියලු දිස්ත්‍රික්ක)</option>
+                  <option value="Colombo">Colombo (කොළඹ)</option>
+                  <option value="Gampaha">Gampaha (ගම්පහ)</option>
+                  <option value="Kalutara">Kalutara (කළුතර)</option>
+                  <option value="Kandy">Kandy (මහනුවර)</option>
+                  <option value="Galle">Galle (ගාල්ල)</option>
+                  <option value="Matara">Matara (මාතර)</option>
+                  <option value="Kurunegala">Kurunegala (කුරුණෑගල)</option>
+                  <option value="Anuradhapura">Anuradhapura (අනුරාධපුර)</option>
+                  <option value="Ratnapura">Ratnapura (රත්නපුර)</option>
+                  <option value="Badulla">Badulla (බදුල්ල)</option>
+                  <option value="Jaffna">Jaffna (යාපනය)</option>
+                  <option value="Other">Other Districts</option>
+                </select>
+              </div>
+
+              <div class="relative">
+                <select id="dirCategoryFilter" onchange="renderVerifiedDirectory()" class="text-xs font-bold px-3 py-2 border border-gray-300 rounded-xl bg-white shadow-sm focus:ring-2 focus:ring-blue-500 text-gray-800">
+                  <option value="ALL">🛠️ All Trades (සියලු සේවා)</option>
+                  <!-- Populated dynamically -->
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="verifiedDirectoryGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </section>
+
+      <!-- HOME NEWS HIGHLIGHTS TEASER -->
+      <section class="py-14 px-4 bg-white border-b border-gray-100">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+            <div>
+              <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Live Updates</span>
+              <h2 class="text-2xl sm:text-3xl font-black text-gray-900">Sri Lanka & Global Industry News</h2>
+            </div>
+            <button onclick="switchView('news')" class="text-sm font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1">
+              View All News & Updates →
+            </button>
+          </div>
+          <div id="homeNewsPreviewGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+        </div>
+      </section>
+
+      <!-- HOME REVIEWS HIGHLIGHTS TEASER -->
+      <section class="py-14 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+            <div>
+              <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Verified Feedback</span>
+              <h2 class="text-2xl sm:text-3xl font-black text-gray-900">Customer Ratings & Testimonials</h2>
+            </div>
+            <button onclick="openReviewModal()" class="py-2 px-4 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow transition-all flex items-center gap-1.5">
+              <i data-lucide="star" class="w-4 h-4"></i> Write a Review
+            </button>
+          </div>
+          <div id="homeReviewsPreviewGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW: RATINGS & CUSTOMER REVIEWS -->
+    <!-- ======================================================== -->
+    <section id="viewReviews" class="portal-view hidden py-12 px-4 max-w-6xl mx-auto">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-200 pb-6 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-1 text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-full mb-2">
+            <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-500 text-amber-500"></i> Verified Customer Feedback
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-gray-900">Ratings & Customer Reviews</h2>
+          <p class="text-sm text-gray-500 mt-1">Real ratings from homeowners and businesses across Sri Lanka.</p>
+        </div>
+        <button onclick="openReviewModal()" class="py-3 px-6 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i> Rate a Technician
+        </button>
+      </div>
+      <div id="fullReviewsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW: SRI LANKA & WORLD NEWS FEED -->
+    <!-- ======================================================== -->
+    <section id="viewNews" class="portal-view hidden py-12 px-4 max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <span class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-black uppercase tracking-wider mb-2">
+          Island & Global Updates
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-2">Sri Lanka & World News Feed</h2>
+        <p class="text-sm text-gray-500">
+          Construction updates, CEB & water board alerts, solar tech innovations, and skilled labor news.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        <button onclick="filterNews('ALL')" class="news-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm" data-filter="ALL">All News</button>
+        <button onclick="filterNews('Sri Lanka')" class="news-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="Sri Lanka">🇱🇰 Sri Lanka & Island</button>
+        <button onclick="filterNews('Home Tips')" class="news-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="Home Tips">💡 Home & Repair Tips</button>
+        <button onclick="filterNews('World')" class="news-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200" data-filter="World">🌍 World Tech & Energy</button>
+      </div>
+      <div id="fullNewsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW: COMPLAINTS & GRIEVANCE REDRESSAL -->
+    <!-- ======================================================== -->
+    <section id="viewComplaints" class="portal-view hidden py-12 px-4 max-w-4xl mx-auto">
+      <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-gray-200 mb-8">
+        <div class="text-center max-w-xl mx-auto mb-8">
+          <div class="w-14 h-14 rounded-2xl bg-rose-100 text-rose-700 flex items-center justify-center mx-auto mb-3 shadow-inner">
+            <i data-lucide="alert-triangle" class="w-7 h-7"></i>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-gray-900">Customer Complaint & Support Desk</h2>
+          <p class="text-xs sm:text-sm text-gray-500 mt-1">
+            Had an issue with a job or technician? Submit a complaint. <strong>Note: Providers receiving 5+ complaints are automatically suspended</strong> pending admin review.
+          </p>
+        </div>
+
+        <form id="complaintForm" onsubmit="handleComplaintSubmit(event)" class="space-y-4 max-w-xl mx-auto">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Full Name *</label>
+            <input type="text" id="compName" required placeholder="e.g. Sunil Warnakula" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-rose-500">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-1">WhatsApp / Phone Number *</label>
+              <input type="tel" id="compPhone" required placeholder="e.g. 0719929453" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-rose-500">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Provider Against (Select or Enter)</label>
+              <select id="compWorkerSelect" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-rose-500 bg-white">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Complaint Category *</label>
+            <select id="compCategory" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-rose-500 bg-white">
+              <option value="Technician Conduct">Technician Conduct / Unprofessional Behavior</option>
+              <option value="Poor Workmanship">Poor Quality of Repair / Work</option>
+              <option value="Billing Dispute">Pricing / Overcharging Dispute</option>
+              <option value="Delay / No-Show">Delay or Technician Did Not Arrive</option>
+              <option value="Other">Other Issues / Suggestions</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Detailed Description of the Complaint *</label>
+            <textarea id="compDetails" rows="3" required placeholder="Explain what happened in detail..." class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-rose-500"></textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-black text-sm shadow-md transition-all flex items-center justify-center gap-2">
+            <i data-lucide="send" class="w-4 h-4"></i> Lodge Official Complaint
+          </button>
+        </form>
+
+        <div class="mt-12 pt-8 border-t border-gray-100">
+          <h3 class="text-base font-black text-gray-900 mb-3">Track Submitted Complaints</h3>
+          <div class="flex gap-2 mb-4">
+            <input type="text" id="compLookupPhone" placeholder="Enter Phone number to view your complaint tickets" class="flex-1 px-4 py-2 border rounded-xl text-xs bg-gray-50">
+            <button onclick="renderComplaintList()" class="py-2 px-4 bg-gray-900 text-white font-bold text-xs rounded-xl hover:bg-gray-800">
+              Lookup
+            </button>
+          </div>
+          <div id="complaintsListArea" class="space-y-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW: PLANS & SUBSCRIPTION PRICING -->
+    <!-- ======================================================== -->
+    <section id="viewPricing" class="portal-view hidden py-12 px-4 max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-black uppercase tracking-wider mb-3">
+          🎁 Special Offer: First 2 Months 100% Free!
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mb-3">Provider Subscription Plans</h2>
+        <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+          Create an account and enjoy <strong>2 Full Months Free Trial</strong> with custom company branding and direct customer job leads. Choose a plan after your trial ends.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Weekly Flex</span>
+            <div class="mt-4 mb-2">
+              <span class="text-3xl font-black text-gray-900">Rs. 490</span>
+              <span class="text-xs text-gray-500"> / week</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-5">Pay week-by-week as you work. Perfect for part-time contractors.</p>
+            <ul class="space-y-2.5 text-xs text-gray-600 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Verified NIC badge</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Direct WhatsApp customer match</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Custom Company Name & Team</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> First 2 Months Free Trial</li>
+            </ul>
+          </div>
+          <button onclick="openPaymentGatewayModal('weekly', 490)" class="w-full py-3 rounded-xl bg-gray-900 hover:bg-gray-800 text-white font-bold text-xs transition-all">
+            Choose Weekly Plan
+          </button>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 border-2 border-blue-600 shadow-lg relative flex flex-col justify-between">
+          <span class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-0.5 rounded-full shadow">
+            Most Popular
+          </span>
+          <div>
+            <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-full uppercase">Monthly Pro</span>
+            <div class="mt-4 mb-2">
+              <span class="text-3xl font-black text-gray-900">Rs. 1,490</span>
+              <span class="text-xs text-gray-500"> / month</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-5">Full monthly access with priority job dispatch in your district.</p>
+            <ul class="space-y-2.5 text-xs text-gray-600 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Everything in Weekly</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Priority Lead Dispatch</strong></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Unlimited Crew & Team Members</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> 24/7 Hotline support</li>
+            </ul>
+          </div>
+          <button onclick="openPaymentGatewayModal('monthly', 1490)" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all shadow-md">
+            Choose Monthly Plan
+          </button>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-purple-600 bg-purple-50 px-2.5 py-1 rounded-full uppercase">Yearly Ultimate</span>
+            <div class="mt-4 mb-2">
+              <span class="text-3xl font-black text-gray-900">Rs. 12,900</span>
+              <span class="text-xs text-gray-500"> / year</span>
+            </div>
+            <p class="text-xs text-gray-500 mb-5">Save over 30%! Includes free featured listing on Navithya LK.</p>
+            <ul class="space-y-2.5 text-xs text-gray-600 mb-6">
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Everything in Pro</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> <strong>Top-Ranked Featured Badge</strong></li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Unlimited job connections</li>
+              <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> Dedicated Account Manager</li>
+            </ul>
+          </div>
+          <button onclick="openPaymentGatewayModal('yearly', 12900)" class="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition-all">
+            Choose Yearly Plan
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW: CUSTOMER PORTAL & TRACKING -->
+    <!-- ======================================================== -->
+    <section id="viewCustomer" class="portal-view hidden py-10 px-4 max-w-5xl mx-auto">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 mb-8">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-6 mb-6">
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-full mb-2">
+              <i data-lucide="user-check" class="w-3.5 h-3.5"></i> Customer Dashboard
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-black text-gray-900">My Service Bookings & Tracking</h2>
+            <p class="text-sm text-gray-500">Track status, contact assigned worker, or cancel/delete requests.</p>
+          </div>
+          <button onclick="openBookingModal()" class="inline-flex items-center gap-2 py-2.5 px-5 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow">
+            <i data-lucide="plus" class="w-4 h-4"></i> New Request
+          </button>
+        </div>
+
+        <div class="bg-blue-50/70 p-4 rounded-2xl border border-blue-100 mb-6 flex flex-col sm:flex-row items-center gap-3">
+          <div class="flex-1 w-full">
+            <label class="block text-xs font-bold text-gray-700 mb-1">Enter your WhatsApp / Phone number to filter your bookings:</label>
+            <div class="relative">
+              <i data-lucide="phone" class="w-4 h-4 text-gray-400 absolute left-3 top-3"></i>
+              <input type="tel" id="customerPhoneFilter" placeholder="e.g. 0719929453" class="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 bg-white" oninput="renderCustomerBookings()">
+            </div>
+          </div>
+          <button onclick="renderCustomerBookings()" class="w-full sm:w-auto py-2.5 px-5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-all sm:mt-5">
+            Search Bookings
+          </button>
+        </div>
+
+        <div id="customerBookingsList" class="space-y-4"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW: WORKER & PROVIDER PORTAL (With Team Management & Suspension Check) -->
+    <!-- ======================================================== -->
+    <section id="viewWorker" class="portal-view hidden py-10 px-4 max-w-5xl mx-auto">
+      <div class="flex justify-center mb-8">
+        <div class="bg-gray-200 p-1 rounded-2xl inline-flex gap-1">
+          <button id="workerTabRegister" onclick="switchWorkerSubTab('register')" class="py-2 px-6 rounded-xl text-sm font-bold bg-white text-blue-700 shadow-sm transition-all">
+            👷 Register Provider / Company (2 Months Free)
+          </button>
+          <button id="workerTabDashboard" onclick="switchWorkerSubTab('dashboard')" class="py-2 px-6 rounded-xl text-sm font-bold text-gray-600 hover:text-gray-900 transition-all">
+            💼 Provider & Team Dashboard
+          </button>
+        </div>
+      </div>
+
+      <!-- WORKER SUB-TAB 1: REGISTRATION FORM -->
+      <div id="workerRegisterPane" class="bg-white rounded-3xl p-6 sm:p-10 shadow-sm border border-gray-100 max-w-2xl mx-auto">
+        <div class="text-center mb-8">
+          <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto mb-3 shadow-inner">
+            <i data-lucide="hard-hat" class="w-8 h-8"></i>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-gray-900">Join as a Verified Provider / Company</h2>
+          <p class="text-sm text-gray-500 mt-1">
+            🎁 <strong>2 Months Free Trial!</strong> Register your company and add your crew/technician team.
+          </p>
+        </div>
+
+        <form id="workerRegistrationForm" onsubmit="handleWorkerRegister(event)" class="space-y-5">
+          <div class="bg-blue-50/70 p-4 rounded-2xl border border-blue-200">
+            <label class="block text-xs font-black text-blue-900 uppercase tracking-wider mb-1">
+              🏢 Your Company / Business Name (සමාගමේ හෝ ව්‍යාපාරයේ නම) *
+            </label>
+            <input type="text" id="wCompanyName" required placeholder="e.g. Apex Electrical Solutions or Bandara Plumbing" class="w-full px-4 py-2.5 rounded-xl border border-blue-300 text-sm focus:ring-2 focus:ring-blue-500 bg-white font-bold text-gray-900">
+            <p class="text-[11px] text-blue-700 mt-1.5">
+              ✨ When you login, the system header will display <strong>your Company Name</strong> instead of default branding!
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Lead Technician / Contact Person Name *</label>
+            <input type="text" id="wName" required placeholder="e.g. Sunil Perera" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Sri Lanka NIC Number *</label>
+              <input type="text" id="wNic" required placeholder="e.g. 198812345678 or 881234567V" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">WhatsApp / Phone Number *</label>
+              <input type="tel" id="wPhone" required placeholder="e.g. 0719929453" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Primary Trade / Service *</label>
+              <select id="wCategory" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 bg-white"></select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Operating District *</label>
+              <select id="wDistrict" required class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 bg-white">
+                <option value="Colombo">Colombo (කොළඹ)</option>
+                <option value="Gampaha">Gampaha (ගම්පහ)</option>
+                <option value="Kalutara">Kalutara (කළුතර)</option>
+                <option value="Kandy">Kandy (මහනුවර)</option>
+                <option value="Galle">Galle (ගාල්ල)</option>
+                <option value="Matara">Matara (මාතර)</option>
+                <option value="Kurunegala">Kurunegala (කුරුණෑගල)</option>
+                <option value="Anuradhapura">Anuradhapura (අනුරාධපුර)</option>
+                <option value="Ratnapura">Ratnapura (රත්නපුර)</option>
+                <option value="Badulla">Badulla (බදුල්ල)</option>
+                <option value="Jaffna">Jaffna (යාපනය)</option>
+                <option value="Other">All Island / Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Years of Experience</label>
+              <input type="number" id="wExperience" placeholder="e.g. 5" min="0" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Estimated Rate / Fee (Rs.)</label>
+              <input type="text" id="wRate" placeholder="e.g. Rs. 3,500 / day" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-1.5">Company Bio / Specializations</label>
+            <textarea id="wBio" rows="2" placeholder="Mention special equipment, team size, NVQ qualifications..." class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500"></textarea>
+          </div>
+
+          <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-start gap-3">
+            <i data-lucide="gift" class="w-5 h-5 text-emerald-600 shrink-0 mt-0.5"></i>
+            <div class="text-xs text-emerald-900">
+              <strong>2 Months Free Trial Active:</strong> You will enjoy 60 full days of unlimited customer matches and team dispatch features at zero cost.
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-black text-base shadow-md transition-all">
+            Register Provider & Start 2-Month Free Trial
+          </button>
+        </form>
+      </div>
+
+      <!-- WORKER SUB-TAB 2: WORKER DASHBOARD -->
+      <div id="workerDashboardPane" class="hidden bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 max-w-4xl mx-auto">
+        <div class="border-b border-gray-100 pb-5 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 class="text-2xl font-black text-gray-900">Provider & Team Management Dashboard</h2>
+            <p class="text-sm text-gray-500">Manage your company profile, crew/team members, and assigned jobs.</p>
+          </div>
+          <div id="workerSubscriptionBadgeArea"></div>
+        </div>
+
+        <div id="workerLoginBox" class="bg-gray-50 p-4 rounded-2xl border border-gray-200 mb-6 flex flex-col sm:flex-row gap-3 items-center">
+          <div class="flex-1 w-full">
+            <label class="block text-xs font-bold text-gray-700 mb-1">Enter your Registered Phone Number or NIC:</label>
+            <input type="text" id="workerLoginIdentifier" placeholder="e.g. 0719929453 or 198812345678" class="w-full px-4 py-2 rounded-xl border border-gray-300 text-sm bg-white">
+          </div>
+          <button onclick="handleWorkerLogin()" class="w-full sm:w-auto py-2.5 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl sm:mt-5 transition-all">
+            Login
+          </button>
+        </div>
+
+        <div id="workerSuspensionNoticeArea"></div>
+        <div id="workerProfileStatusArea"></div>
+        
+        <!-- Team / Crew Management Section -->
+        <div id="workerTeamSection" class="mt-8 border-t border-gray-200 pt-6">
+          <!-- Populated by JS -->
+        </div>
+
+        <div id="workerJobsArea" class="mt-8 border-t border-gray-200 pt-6"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- VIEW: ADMIN PANEL -->
+    <!-- ======================================================== -->
+    <section id="viewAdmin" class="portal-view hidden py-8 px-4 max-w-7xl mx-auto">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-purple-100 text-purple-800 text-xs font-black px-3 py-1 rounded-full mb-2">
+            <i data-lucide="shield-check" class="w-4 h-4"></i> System Administrator
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-gray-900">Admin Control & Dispatch Panel</h1>
+          <p class="text-xs sm:text-sm text-gray-500">
+            WhatsApp Dispatch: <strong>0719929453</strong> | Hotlines: <strong>0719929453</strong> / <strong>0729929453</strong> | <a href="mailto:snavithya@gmail.com" class="text-blue-600">snavithya@gmail.com</a>
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="exportDataJSON()" class="py-2 px-3.5 rounded-xl border border-gray-200 hover:bg-gray-50 text-xs font-bold transition-all flex items-center gap-1.5">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i> Export Data
+          </button>
+          <button onclick="logoutAdmin()" class="py-2 px-4 rounded-xl border border-red-200 bg-red-50 text-red-700 hover:bg-red-100 text-xs font-bold transition-all flex items-center gap-1.5">
+            <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Logout
+          </button>
+        </div>
+      </div>
+
+      <!-- KPI METRICS BAR -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center shrink-0">
+            <i data-lucide="clipboard-list" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="text-2xl font-black text-gray-900" id="statTotalRequests">0</div>
+            <div class="text-xs font-bold text-gray-500">Total Bookings</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0">
+            <i data-lucide="clock" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="text-2xl font-black text-amber-600" id="statPendingRequests">0</div>
+            <div class="text-xs font-bold text-gray-500">Pending Match</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+            <i data-lucide="building-2" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="text-2xl font-black text-emerald-600" id="statVerifiedWorkers">0</div>
+            <div class="text-xs font-bold text-gray-500">Active Providers</div>
+          </div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-sm flex items-center gap-4">
+          <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+            <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <div class="text-2xl font-black text-rose-600" id="statComplaintsCount">0</div>
+            <div class="text-xs font-bold text-gray-500">Complaints Logged</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADMIN TABS -->
+      <div class="flex flex-wrap gap-2 border-b border-gray-200 mb-6 bg-white p-2 rounded-2xl shadow-sm">
+        <button id="adminTabBtnRequests" onclick="switchAdminSubTab('requests')" class="py-2.5 px-5 rounded-xl text-sm font-bold bg-blue-600 text-white shadow-sm flex items-center gap-2">
+          <i data-lucide="inbox" class="w-4 h-4"></i> Booking Requests
+        </button>
+        <button id="adminTabBtnWorkers" onclick="switchAdminSubTab('workers')" class="py-2.5 px-5 rounded-xl text-sm font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-100 flex items-center gap-2">
+          <i data-lucide="users" class="w-4 h-4"></i> Providers, Teams & Bans
+        </button>
+        <button id="adminTabBtnComplaints" onclick="switchAdminSubTab('complaints')" class="py-2.5 px-5 rounded-xl text-sm font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-100 flex items-center gap-2">
+          <i data-lucide="alert-circle" class="w-4 h-4"></i> Complaints & Auto-Ban Desk
+        </button>
+        <button id="adminTabBtnNewWorker" onclick="openAddWorkerModal()" class="ml-auto py-2.5 px-4 rounded-xl text-sm font-bold bg-amber-500 hover:bg-amber-600 text-white flex items-center gap-1.5 shadow-sm">
+          <i data-lucide="user-plus" class="w-4 h-4"></i> Add Provider
+        </button>
+      </div>
+
+      <!-- ADMIN SUB-TAB 1: REQUESTS -->
+      <div id="adminPaneRequests" class="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+          <h2 class="text-xl font-black text-gray-900">All Customer Service Requests</h2>
+          <div class="flex flex-wrap items-center gap-2 w-full sm:w-auto">
+            <select id="adminRequestStatusFilter" onchange="renderAdminRequests()" class="px-3 py-2 rounded-xl border border-gray-300 text-xs font-bold bg-white">
+              <option value="ALL">All Statuses</option>
+              <option value="Pending">Pending Match</option>
+              <option value="Matched">Worker Matched</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+            <input type="text" id="adminRequestSearch" oninput="renderAdminRequests()" placeholder="Search name, phone, district..." class="px-3 py-2 rounded-xl border border-gray-300 text-xs">
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-500 uppercase text-[10px] font-black tracking-wider border-b border-gray-200">
+              <tr>
+                <th class="py-3 px-4">Request ID / Date</th>
+                <th class="py-3 px-4">Customer & WhatsApp</th>
+                <th class="py-3 px-4">Service & Issue</th>
+                <th class="py-3 px-4">District</th>
+                <th class="py-3 px-4">Status</th>
+                <th class="py-3 px-4">Assigned Provider & Team</th>
+                <th class="py-3 px-4 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminRequestsTableBody" class="divide-y divide-gray-100"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-TAB 2: PROVIDERS & TEAMS -->
+      <div id="adminPaneWorkers" class="hidden bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-black text-gray-900">Providers, Crew Teams & Suspension Status</h2>
+            <p class="text-xs text-gray-500">Unban providers, verify NIC badges, and assign crew technicians.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="adminWorkerCategoryFilter" onchange="renderAdminWorkers()" class="px-3 py-2 rounded-xl border border-gray-300 text-xs font-bold bg-white">
+              <option value="ALL">All Trades</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-500 uppercase text-[10px] font-black tracking-wider border-b border-gray-200">
+              <tr>
+                <th class="py-3 px-4">Company / Provider</th>
+                <th class="py-3 px-4">Trade</th>
+                <th class="py-3 px-4">NIC & Phone</th>
+                <th class="py-3 px-4">Team / Crew</th>
+                <th class="py-3 px-4">Complaints & Status</th>
+                <th class="py-3 px-4 text-right">Admin Actions (Unban / Team / Delete)</th>
+              </tr>
+            </thead>
+            <tbody id="adminWorkersTableBody" class="divide-y divide-gray-100"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ADMIN SUB-TAB 3: COMPLAINTS DESK -->
+      <div id="adminPaneComplaints" class="hidden bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+        <div class="flex items-center justify-between mb-6">
+          <div>
+            <h2 class="text-xl font-black text-gray-900">Customer Grievances & Auto-Ban System</h2>
+            <p class="text-xs text-gray-500">Providers with 5+ complaints are automatically suspended by the system.</p>
+          </div>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="bg-gray-50 text-gray-500 uppercase text-[10px] font-black tracking-wider border-b border-gray-200">
+              <tr>
+                <th class="py-3 px-4">Ticket ID / Date</th>
+                <th class="py-3 px-4">Customer Details</th>
+                <th class="py-3 px-4">Provider Targeted</th>
+                <th class="py-3 px-4">Complaint Notes</th>
+                <th class="py-3 px-4">Resolution Status</th>
+                <th class="py-3 px-4 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminComplaintsTableBody" class="divide-y divide-gray-100"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-gray-900 text-gray-400 py-12 px-4 border-t border-gray-800 mt-12">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
+              <i data-lucide="wrench" class="w-4 h-4"></i>
+            </div>
+            <span class="text-white font-black text-xl tracking-tight">Navithya LK</span>
+          </div>
+          <p class="text-xs text-gray-400 leading-relaxed mb-4">
+            Sri Lanka's premier trust-first platform connecting verified skilled tradesmen with home and business owners.
+          </p>
+          <div class="text-xs text-emerald-400 font-bold flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4"></i> 100% NIC Identity Checked
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Official Contact</h4>
+          <ul class="space-y-2.5 text-xs">
+            <li class="flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-blue-400"></i>
+              <span>Hotline 1: <strong class="text-white">0719929453</strong></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-blue-400"></i>
+              <span>Hotline 2: <strong class="text-white">0729929453</strong></span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-amber-400"></i>
+              <a href="mailto:snavithya@gmail.com" class="text-blue-400 hover:underline">snavithya@gmail.com</a>
+            </li>
+            <li class="flex items-center gap-2 pt-1">
+              <a href="https://wa.me/94719929453?text=Hello%20Navithya%20LK" target="_blank" class="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-all">
+                <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp: 0719929453
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-xs">
+            <li><button onclick="switchView('services')" class="hover:text-white transition-colors">Browse Services</button></li>
+            <li><button onclick="switchView('reviews')" class="hover:text-white transition-colors">Ratings & Reviews</button></li>
+            <li><button onclick="switchView('news')" class="hover:text-white transition-colors">SL & World News</button></li>
+            <li><button onclick="switchView('complaints')" class="hover:text-white transition-colors">Lodge a Complaint</button></li>
+            <li><button onclick="switchView('pricing')" class="hover:text-white transition-colors text-emerald-400 font-bold">2-Month Free Trial Plans</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white text-xs font-bold uppercase tracking-wider mb-4">Portals & Login</h4>
+          <ul class="space-y-2 text-xs">
+            <li><button onclick="switchView('customer')" class="hover:text-white transition-colors">Customer Tracking</button></li>
+            <li><button onclick="switchView('worker')" class="hover:text-white transition-colors">Register as Provider</button></li>
+            <li><button onclick="openAdminModal()" class="hover:text-white text-purple-400 font-semibold transition-colors">Admin Login</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+        <div>© 2026 Navithya Lanka. Inspired by GetItDone.lk. Powered by Firebase.</div>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-gray-300">Privacy Policy</a>
+          <span>•</span>
+          <a href="#" class="hover:text-gray-300">Terms of Service</a>
+          <span>•</span>
+          <button onclick="openAdminModal()" class="text-purple-400 hover:underline">Admin Login</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- MODALS -->
+  <!-- ======================================================== -->
+
+  <!-- 1. BOOKING / REQUEST WORKER MODAL -->
+  <div id="bookingModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-1 rounded-full bg-gray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="inline-flex p-3 rounded-2xl bg-blue-50 text-blue-600 mb-2">
+          <i data-lucide="calendar" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-2xl font-black text-gray-900" data-i18n="modalBookTitle">Request a Verified Worker</h3>
+        <p class="text-xs text-gray-500" data-i18n="modalBookDesc">Tell us what you need. We will match an NIC-verified professional to your WhatsApp.</p>
+      </div>
+
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Select Service (සේවාව) *</label>
+          <select id="bCategory" required onchange="updateBookingModalProviderDropdown()" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 bg-white"></select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Issue / Problem Title *</label>
+          <input type="text" id="bTitle" required placeholder="e.g. Main switch trip / Pipe leak in kitchen" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">District (දිස්ත්‍රික්කය) *</label>
+            <select id="bDistrict" required onchange="updateBookingModalProviderDropdown()" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500 bg-white">
+              <option value="Colombo">Colombo (කොළඹ)</option>
+              <option value="Gampaha">Gampaha (ගම්පහ)</option>
+              <option value="Kalutara">Kalutara (කළුතර)</option>
+              <option value="Kandy">Kandy (මහනුවර)</option>
+              <option value="Galle">Galle (ගාල්ල)</option>
+              <option value="Matara">Matara (මාතර)</option>
+              <option value="Kurunegala">Kurunegala (කුරුණෑගල)</option>
+              <option value="Anuradhapura">Anuradhapura (අනුරාධපුර)</option>
+              <option value="Ratnapura">Ratnapura (රත්නපුර)</option>
+              <option value="Badulla">Badulla (බදුල්ල)</option>
+              <option value="Jaffna">Jaffna (යාපනය)</option>
+              <option value="Other">Other District</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">City / Town (නගරය) *</label>
+            <input type="text" id="bCity" required placeholder="e.g. Nugegoda / Kandy Town" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+          </div>
+        </div>
+
+        <!-- Target Specific Provider Selector (Location & Trade Filtered) -->
+        <div class="bg-blue-50/60 p-3.5 rounded-2xl border border-blue-200">
+          <label class="block text-xs font-black text-blue-950 uppercase mb-1 flex items-center justify-between">
+            <span>🎯 Dispatch to Specific Provider (අභිමත ශිල්පියා)</span>
+            <span class="text-[10px] text-blue-600 font-normal">Location Matched</span>
+          </label>
+          <select id="bPreferredWorker" class="w-full px-3.5 py-2 rounded-xl border border-blue-300 text-xs focus:ring-2 focus:ring-blue-500 bg-white font-bold text-gray-800">
+            <option value="">⚡ Auto-Match: Any verified specialist in my district</option>
+          </select>
+          <p class="text-[10px] text-blue-700 mt-1">
+            Choose a specific local company above, or leave on <strong>Auto-Match</strong> to notify all verified providers in your district.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Name *</label>
+            <input type="text" id="bCustomerName" required placeholder="e.g. Kasun Fernando" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">WhatsApp Number *</label>
+            <input type="tel" id="bCustomerPhone" required placeholder="e.g. 0719929453" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Detailed Description</label>
+          <textarea id="bDesc" rows="2" placeholder="Explain the problem or requirement in detail..." class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+
+        <div class="flex items-center gap-2 bg-amber-50 p-3 rounded-xl border border-amber-200">
+          <input type="checkbox" id="bUrgent" class="w-4 h-4 text-amber-600 rounded">
+          <label for="bUrgent" class="text-xs font-bold text-amber-900 cursor-pointer">
+            Urgent Emergency Request (Require assistance immediately today)
+          </label>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-black text-base shadow-lg transition-all">
+          Submit Worker Request (ඉල්ලුම් කරන්න)
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. RATING & REVIEW MODAL -->
+  <div id="reviewModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeReviewModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-1 rounded-full bg-gray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto mb-2 shadow-inner">
+          <i data-lucide="star" class="w-6 h-6 fill-amber-500 text-amber-500"></i>
+        </div>
+        <h3 class="text-2xl font-black text-gray-900">Rate a Service Provider</h3>
+        <p class="text-xs text-gray-500 mt-1">Help fellow Sri Lankans find the best technicians</p>
+      </div>
+
+      <form onsubmit="handleReviewSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Name *</label>
+          <input type="text" id="revAuthor" required placeholder="e.g. Ruwanthi De Silva" class="w-full px-3.5 py-2 rounded-xl border text-sm">
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">District *</label>
+            <input type="text" id="revDistrict" required placeholder="e.g. Colombo 07" class="w-full px-3.5 py-2 border rounded-xl text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Trade *</label>
+            <select id="revCategory" class="w-full px-3.5 py-2 border rounded-xl text-sm bg-white"></select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Technician / Company Name</label>
+          <input type="text" id="revWorkerName" placeholder="e.g. Sunil Perera (Electrician)" class="w-full px-3.5 py-2 border rounded-xl text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Rating (Stars) *</label>
+          <select id="revStars" class="w-full px-3.5 py-2 border rounded-xl text-sm font-bold bg-white text-amber-600">
+            <option value="5">⭐⭐⭐⭐⭐ 5 Stars (Excellent)</option>
+            <option value="4">⭐⭐⭐⭐ 4 Stars (Very Good)</option>
+            <option value="3">⭐⭐⭐ 3 Stars (Average)</option>
+            <option value="2">⭐⭐ 2 Stars (Below Average)</option>
+            <option value="1">⭐ 1 Star (Poor)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Your Feedback / Review *</label>
+          <textarea id="revComment" rows="2" required placeholder="Describe your experience with the technician..." class="w-full px-3.5 py-2 border rounded-xl text-sm"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl text-sm transition-all shadow-md">
+          Publish Review
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. NEWS READER MODAL -->
+  <div id="newsReaderModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85vh] overflow-y-auto">
+      <button onclick="closeNewsReaderModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-1 rounded-full bg-gray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="newsModalContent"></div>
+    </div>
+  </div>
+
+  <!-- 4. ADMIN LOGIN MODAL -->
+  <div id="adminLoginModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeAdminModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-1 rounded-full bg-gray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center mx-auto mb-2 shadow-inner">
+          <i data-lucide="shield" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-2xl font-black text-gray-900">Admin Portal Login</h3>
+        <p class="text-xs text-gray-500 mt-1">Authorized Administrators Only</p>
+      </div>
+
+      <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Username</label>
+          <input type="text" id="adminUser" required placeholder="Enter username" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-purple-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Password</label>
+          <input type="password" id="adminPass" required placeholder="••••••••" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-purple-500">
+        </div>
+        <div id="adminLoginError" class="hidden text-xs text-red-600 font-bold text-center">
+          Authentication failed. Please verify your credentials.
+        </div>
+        <button type="submit" class="w-full py-3 px-6 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-black text-sm shadow-md transition-all">
+          Sign In as Administrator
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. PAYMENT GATEWAY MODAL -->
+  <div id="paymentGatewayModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closePaymentGatewayModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-1 rounded-full bg-gray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto mb-2 shadow-inner">
+          <i data-lucide="credit-card" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-2xl font-black text-gray-900">Activate Provider Subscription</h3>
+        <p class="text-xs text-gray-500 mt-1">Secure payment gateway for Navithya LK Provider Plans</p>
+      </div>
+
+      <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 mb-5 flex items-center justify-between">
+        <div>
+          <span class="text-xs text-blue-700 font-bold block">Selected Subscription</span>
+          <span id="paymentSelectedPlanTitle" class="text-base font-black text-blue-950">Monthly Pro Plan</span>
+        </div>
+        <div class="text-right">
+          <span class="text-xs text-blue-700 font-bold block">Amount to Pay</span>
+          <span id="paymentSelectedAmount" class="text-lg font-black text-blue-700">Rs. 1,490</span>
+        </div>
+      </div>
+
+      <form id="paymentForm" onsubmit="handleProcessPayment(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1.5">Select Payment Method</label>
+          <div class="grid grid-cols-3 gap-2">
+            <label class="border-2 border-blue-600 bg-blue-50 p-3 rounded-xl cursor-pointer text-center text-xs font-bold text-blue-900 flex flex-col items-center gap-1">
+              <input type="radio" name="paymentMethod" value="card" checked class="hidden">
+              <i data-lucide="credit-card" class="w-4 h-4 text-blue-600"></i> Card (Visa/Master)
+            </label>
+            <label class="border border-gray-200 p-3 rounded-xl cursor-pointer text-center text-xs font-bold text-gray-700 flex flex-col items-center gap-1 hover:bg-gray-50">
+              <input type="radio" name="paymentMethod" value="bank" class="hidden">
+              <i data-lucide="building" class="w-4 h-4 text-emerald-600"></i> Bank Transfer
+            </label>
+            <label class="border border-gray-200 p-3 rounded-xl cursor-pointer text-center text-xs font-bold text-gray-700 flex flex-col items-center gap-1 hover:bg-gray-50">
+              <input type="radio" name="paymentMethod" value="wallet" class="hidden">
+              <i data-lucide="smartphone" class="w-4 h-4 text-purple-600"></i> eZ Cash / Genie
+            </label>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Company / Provider Phone or ID *</label>
+          <input type="text" id="paymentWorkerPhone" required placeholder="e.g. 0719929453" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Card / Account Holder</label>
+            <input type="text" id="paymentHolderName" placeholder="Full Name on Card" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 uppercase mb-1">Card Number / Slip Ref</label>
+            <input type="text" id="paymentCardNumber" placeholder="4111 2222 3333 4444" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 text-sm font-mono">
+          </div>
+        </div>
+
+        <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm shadow-lg transition-all flex items-center justify-center gap-2">
+          <i data-lucide="lock" class="w-4 h-4"></i> Complete & Activate Account Now
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 6. ASSIGN WORKER & TEAM MODAL -->
+  <div id="assignWorkerModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeAssignWorkerModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-1 rounded-full bg-gray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="mb-4">
+        <div class="text-xs font-bold text-blue-600 uppercase">Match Technician / Company</div>
+        <h3 class="text-xl font-black text-gray-900" id="assignModalTitle">Assign Provider to Request</h3>
+        <p class="text-xs text-gray-500" id="assignModalSub">Choose an active, non-suspended provider for this customer request.</p>
+      </div>
+
+      <div id="assignWorkerList" class="space-y-3 my-4"></div>
+    </div>
+  </div>
+
+  <!-- 7. MANUAL ADD WORKER / TEAM MEMBER MODAL -->
+  <div id="addWorkerModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeAddWorkerModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-1 rounded-full bg-gray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <h3 class="text-xl font-black text-gray-900 mb-4">Add Provider Manually</h3>
+      <form onsubmit="handleAdminAddWorker(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-xs font-bold text-gray-700">Company / Business Name *</label>
+          <input type="text" id="adminNewWorkerCompany" required placeholder="e.g. Silva Tech Services" class="w-full px-3 py-2 border rounded-xl text-sm font-bold">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700">Contact Person Name *</label>
+          <input type="text" id="adminNewWorkerName" required class="w-full px-3 py-2 border rounded-xl text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700">NIC Number *</label>
+          <input type="text" id="adminNewWorkerNic" required placeholder="e.g. 198512345678" class="w-full px-3 py-2 border rounded-xl text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700">WhatsApp / Phone *</label>
+          <input type="tel" id="adminNewWorkerPhone" required placeholder="0719929453" class="w-full px-3 py-2 border rounded-xl text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700">Trade / Category *</label>
+          <select id="adminNewWorkerCategory" required class="w-full px-3 py-2 border rounded-xl text-sm bg-white"></select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700">District *</label>
+          <select id="adminNewWorkerDistrict" required class="w-full px-3 py-2 border rounded-xl text-sm bg-white">
+            <option value="Colombo">Colombo</option>
+            <option value="Gampaha">Gampaha</option>
+            <option value="Kalutara">Kalutara</option>
+            <option value="Kandy">Kandy</option>
+            <option value="Galle">Galle</option>
+            <option value="Matara">Matara</option>
+            <option value="Kurunegala">Kurunegala</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2 pt-2">
+          <input type="checkbox" id="adminNewWorkerVerified" checked class="w-4 h-4 text-emerald-600 rounded">
+          <label for="adminNewWorkerVerified" class="text-xs font-bold text-emerald-800">Immediately Mark as NIC Verified Badge</label>
+        </div>
+        <button type="submit" class="w-full py-3 bg-blue-600 text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition-all mt-4">
+          Save Provider
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 8. ADMIN ADD TEAM MEMBER TO PROVIDER MODAL -->
+  <div id="adminAddTeamModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeAdminAddTeamModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 p-1 rounded-full bg-gray-100">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="mb-4">
+        <span class="text-xs font-bold text-blue-600 uppercase">Provider Crew Management</span>
+        <h3 class="text-xl font-black text-gray-900" id="adminAddTeamModalTitle">Add Crew Member to Provider</h3>
+      </div>
+      <form onsubmit="handleAdminSubmitTeamMember(event)" class="space-y-3.5">
+        <input type="hidden" id="adminTargetWorkerId">
+        <div>
+          <label class="block text-xs font-bold text-gray-700">Team Member / Technician Name *</label>
+          <input type="text" id="adminTeamMemberName" required placeholder="e.g. Kasun Bandara" class="w-full px-3 py-2 border rounded-xl text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700">NIC Number *</label>
+          <input type="text" id="adminTeamMemberNic" required placeholder="e.g. 199512345678" class="w-full px-3 py-2 border rounded-xl text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700">Phone Number *</label>
+          <input type="tel" id="adminTeamMemberPhone" required placeholder="e.g. 0771234567" class="w-full px-3 py-2 border rounded-xl text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700">Role / Skill in Company *</label>
+          <input type="text" id="adminTeamMemberRole" required placeholder="e.g. Senior Wireman / Assistant" class="w-full px-3 py-2 border rounded-xl text-sm">
+        </div>
+        <button type="submit" class="w-full py-3 bg-blue-600 text-white font-bold rounded-xl text-sm hover:bg-blue-700 transition-all mt-3">
+          Assign Team Member to Provider
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 9. TOAST NOTIFICATION UTILITY -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-gray-900 text-white px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 border border-gray-800">
+      <div id="toastIcon" class="text-emerald-400">
+        <i data-lucide="check-circle" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <div id="toastTitle" class="text-xs font-black">Success</div>
+        <div id="toastMessage" class="text-xs text-gray-300">Action completed successfully</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= FIREBASE SDK & APPLICATION LOGIC ================= -->
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-analytics-compat.js"></script>
+
+  <script>
+    /**
+     * Navithya Lanka - All-In-One Application
+     * Featuring Auto-Ban upon 5+ Complaints, Unban Action, Team/Crew Management,
+     * Ratings, SL & World News, Whitelabel Company Branding & Subscriptions.
+     */
+
+    // Firebase Init
+    const firebaseConfig = {
+      apiKey: "AIzaSyDMVxd4yyprLIUlszbAnPN7L02KE5Sfb0s",
+      authDomain: "navithya-ca0e7.firebaseapp.com",
+      projectId: "navithya-ca0e7",
+      storageBucket: "navithya-ca0e7.firebasestorage.app",
+      messagingSenderId: "44611390829",
+      appId: "1:44611390829:web:3497a4732c6614e9101e64",
+      measurementId: "G-63GNZXPXBF"
+    };
+
+    let fdb = null;
+    try {
+      if (window.firebase) {
+        const app = firebase.initializeApp(firebaseConfig);
+        try { firebase.analytics(); } catch (e) {}
+        fdb = firebase.firestore();
+      }
+    } catch (e) {
+      console.warn("Firebase fallback mode:", e.message);
+    }
+    window.navithyaFirebaseDB = fdb;
+
+    // Services Data
+    const SERVICES_DATA = [
+      { id: 'ac-technician', name: 'AC Technician', nameSi: 'AC කාර්මික', icon: 'wind', bg: 'bg-sky-100', text: 'text-sky-600' },
+      { id: 'aluminium', name: 'Aluminium Fabrication', nameSi: 'ඇලුමිනියම් වැඩ', icon: 'wrench', bg: 'bg-sky-50', text: 'text-sky-600' },
+      { id: 'carpentry', name: 'Carpenter', nameSi: 'වඩු කාර්මික', icon: 'hammer', bg: 'bg-orange-100', text: 'text-orange-600' },
+      { id: 'cctv', name: 'CCTV Technician', nameSi: 'CCTV කාර්මික', icon: 'camera', bg: 'bg-purple-100', text: 'text-purple-600' },
+      { id: 'cleaning', name: 'Cleaner', nameSi: 'පිරිසිදු කරන්නන්', icon: 'sparkles', bg: 'bg-teal-100', text: 'text-teal-600' },
+      { id: 'electrician', name: 'Electrician', nameSi: 'විදුලි කාර්මික', icon: 'zap', bg: 'bg-amber-100', text: 'text-amber-600' },
+      { id: 'equipment-repair', name: 'Equipment Repair', nameSi: 'උපකරණ අලුත්වැඩියාව', icon: 'laptop', bg: 'bg-purple-100', text: 'text-purple-600' },
+      { id: 'gardener', name: 'Gardener', nameSi: 'වතු නඩත්තු', icon: 'leaf', bg: 'bg-green-100', text: 'text-green-600' },
+      { id: 'glass-fabricator', name: 'Glass Fabricator', nameSi: 'වීදුරු වැඩ', icon: 'layers', bg: 'bg-cyan-100', text: 'text-cyan-600' },
+      { id: 'handyman', name: 'Handyman', nameSi: 'හැන්ඩිමෑන්', icon: 'wrench', bg: 'bg-emerald-100', text: 'text-emerald-600' },
+      { id: 'lathe-machining', name: 'Lathe Machining', nameSi: 'ලියවන පට්ටල්', icon: 'cog', bg: 'bg-slate-100', text: 'text-slate-700' },
+      { id: 'masonry', name: 'Mason', nameSi: 'මේසන් බාස්', icon: 'hammer', bg: 'bg-orange-50', text: 'text-orange-700' },
+      { id: 'motor-mechanic', name: 'Motor Mechanic', nameSi: 'මෝටර් කාර්මික', icon: 'car', bg: 'bg-indigo-100', text: 'text-indigo-600' },
+      { id: 'painting', name: 'Painter', nameSi: 'පේන්ටර්', icon: 'paintbrush', bg: 'bg-rose-100', text: 'text-rose-600' },
+      { id: 'pest-control', name: 'Pest Control', nameSi: 'කෘමි හානි පාලනය', icon: 'bug', bg: 'bg-emerald-100', text: 'text-emerald-700' },
+      { id: 'plumber', name: 'Plumber', nameSi: 'නල කාර්මික', icon: 'droplets', bg: 'bg-blue-100', text: 'text-blue-600' },
+      { id: 'roofing', name: 'Roofing Specialist', nameSi: 'වහල සෙවිලි', icon: 'hammer', bg: 'bg-red-50', text: 'text-red-600' },
+      { id: 'solar', name: 'Solar Installer', nameSi: 'සූර්ය බල පද්ධති', icon: 'zap', bg: 'bg-yellow-50', text: 'text-yellow-600' },
+      { id: 'tiles', name: 'Tiles Specialist', nameSi: 'ටයිල් වැඩ', icon: 'sparkles', bg: 'bg-indigo-50', text: 'text-indigo-600' },
+      { id: 'waste-septic', name: 'Waste & Septic', nameSi: 'අපද්‍රව්‍ය ඉවත් කිරීම', icon: 'truck', bg: 'bg-teal-100', text: 'text-teal-700' },
+      { id: 'welding', name: 'Welder', nameSi: 'වෙල්ඩින් වැඩ', icon: 'wrench', bg: 'bg-neutral-100', text: 'text-neutral-600' }
+    ];
+
+    const POPULAR_REQUESTS = [
+      { service: 'Electrician', problem: 'Power Failure', problemSi: 'විදුලිය විසන්ධි වීම', icon: 'zap', bg: 'bg-amber-100', text: 'text-amber-600' },
+      { service: 'Plumber', problem: 'Water Leak', problemSi: 'ජලය කාන්දු වීම', icon: 'droplets', bg: 'bg-blue-100', text: 'text-blue-600' },
+      { service: 'AC Technician', problem: 'AC Not Cooling', problemSi: 'AC සිසිල් නොවීම', icon: 'wind', bg: 'bg-sky-100', text: 'text-sky-600' },
+      { service: 'Pest Control', problem: 'Pest Control', problemSi: 'වේයන් හා කෘමි පාලනය', icon: 'bug', bg: 'bg-emerald-100', text: 'text-emerald-700' },
+      { service: 'CCTV Technician', problem: 'CCTV Setup', problemSi: 'CCTV සවිකිරීම', icon: 'camera', bg: 'bg-purple-100', text: 'text-purple-600' },
+      { service: 'Handyman', problem: 'Door Lock Repair', problemSi: 'දොර අගුල් අලුත්වැඩියාව', icon: 'wrench', bg: 'bg-emerald-100', text: 'text-emerald-600' },
+      { service: 'Electrician', problem: 'Fan Repair', problemSi: 'විදුලි පංකා අලුත්වැඩියාව', icon: 'star', bg: 'bg-indigo-100', text: 'text-indigo-600' }
+    ];
+
+    const NEWS_DATA = [
+      {
+        id: 'news-1',
+        title: 'CEB Solar Net Metering & Roof Solar Expansion Guidelines Announced',
+        titleSi: 'ලංකා විදුලිබල මණ්ඩලයේ සූර්ය බලශක්ති නව මාර්ගෝපදේශ ප්‍රකාශයට පත් කෙරේ',
+        category: 'Sri Lanka',
+        date: '2026-09-29',
+        tag: '🇱🇰 Sri Lanka',
+        summary: 'Sri Lanka accelerates rooftop solar adoption with simplified grid approvals. Certified solar technicians in high demand across Western and Central provinces.',
+        content: 'The Ceylon Electricity Board (CEB) and sustainable energy authorities have updated connection policies for residential rooftop solar installations. Verified technicians on Navithya are ready to assist with site surveys and inverter installations.'
+      },
+      {
+        id: 'news-2',
+        title: 'Colombo Construction & Plumbing Quality Safety Advisory for Monsoons',
+        titleSi: 'වැසි සමය වෙනුවෙන් ජලනල හා කාණු පද්ධති නඩත්තු ආරක්ෂණ උපදෙස්',
+        category: 'Home Tips',
+        date: '2026-09-28',
+        tag: '💡 Home Tips',
+        summary: 'Pre-monsoon roof waterproofing and septic tank inspection advised to prevent residential waterlogging and electrical tripping.',
+        content: 'Homeowners are urged to inspect gutters, downpipes, and main distribution boards before heavy showers. Contact verified plumbers and roof specialists early.'
+      },
+      {
+        id: 'news-3',
+        title: 'Global Trends: Smart Inverter ACs and Energy Efficient Homes in 2026',
+        titleSi: 'ලෝක ප්‍රවණතා: අධි බලශක්ති කාර්යක්ෂම Smart Inverter AC තාක්ෂණය',
+        category: 'World',
+        date: '2026-09-27',
+        tag: '🌍 World Tech',
+        summary: 'Next-gen R32 and eco-friendly refrigerants reduce household power bills by up to 40% when maintained regularly by certified AC technicians.',
+        content: 'Global HVAC standards highlight the importance of biannual coil servicing to preserve compressor lifespan and indoor air purity in tropical climates.'
+      }
+    ];
+
+    const REVIEWS_DATA = [
+      {
+        id: 'rev-1',
+        author: 'Niroshan Wickramasinghe',
+        district: 'Colombo 05',
+        workerName: 'Apex Electrical Solutions (Sunil Perera)',
+        category: 'Electrician',
+        stars: 5,
+        date: '2026-09-28',
+        comment: 'Main switch tripping problem was resolved within 45 minutes! Very polite, wore identity card, and charges were very fair.'
+      },
+      {
+        id: 'rev-2',
+        author: 'Dr. Anoma Senanayake',
+        district: 'Kandy Town',
+        workerName: 'CoolAir Technologies (Chaminda Silva)',
+        category: 'AC Technician',
+        stars: 5,
+        date: '2026-09-27',
+        comment: 'Excellent AC gas servicing and coil cleaning. Came on time and gave a written guarantee. Highly recommend Navithya!'
+      }
+    ];
+
+    const COMPLAINTS_DATA = [
+      {
+        id: 'CMP-201',
+        name: 'Suresh Jayawardena',
+        phone: '0719929453',
+        workerId: 'w-1',
+        workerName: 'Apex Electrical Solutions',
+        category: 'Delay / No-Show',
+        details: 'Technician arrived 30 minutes late due to heavy traffic in Rajagiriya.',
+        status: 'Resolved',
+        resolutionNotes: 'Admin contacted technician and resolved issue with customer.',
+        date: '2026-09-28'
+      }
+    ];
+
+    // Global Language State
+    let currentLang = 'en';
+
+    function getFutureDate(days) {
+      const d = new Date();
+      d.setDate(d.getDate() + days);
+      return d.toISOString().slice(0, 10);
+    }
+
+    // Default Seed Workers & Teams
+    const DEFAULT_WORKERS = [
+      {
+        id: 'w-1',
+        companyName: 'Apex Electrical Solutions',
+        name: 'Sunil Perera',
+        category: 'Electrician',
+        nic: '198212345678',
+        phone: '0719929453',
+        district: 'Colombo',
+        experience: '10',
+        rate: 'Rs. 3,500 / day',
+        verified: true,
+        available: true,
+        subscriptionStatus: 'trial',
+        subscriptionPlan: 'Monthly Pro',
+        trialEnds: getFutureDate(45),
+        banned: false,
+        complaintsCount: 0,
+        rating: 4.9,
+        jobsCompleted: 42,
+        bio: 'Licensed electrical engineering team with 10+ years experience in Colombo & suburbs.',
+        team: [
+          { id: 'tm-1', name: 'Kasun Bandara', nic: '199512345678', phone: '0778899001', role: 'Assistant Wireman' },
+          { id: 'tm-2', name: 'Sanjaya Kumara', nic: '199812345678', phone: '0778899002', role: 'Solar Inverter Tech' }
+        ]
+      },
+      {
+        id: 'w-2',
+        companyName: 'Bandara Plumbing & Sanitary Services',
+        name: 'Nimal Bandara',
+        category: 'Plumber',
+        nic: '198945678123',
+        phone: '0729929453',
+        district: 'Gampaha',
+        experience: '8',
+        rate: 'Rs. 3,000 / day',
+        verified: true,
+        available: true,
+        subscriptionStatus: 'active',
+        subscriptionPlan: 'Yearly Ultimate',
+        trialEnds: getFutureDate(180),
+        banned: false,
+        complaintsCount: 0,
+        rating: 4.8,
+        jobsCompleted: 35,
+        bio: 'Expert in high pressure pipe leakages, water pumps, and bathroom fittings.',
+        team: [
+          { id: 'tm-3', name: 'Dinesh Wickrama', nic: '199411223344', phone: '0712233445', role: 'Pipe Fitter' }
+        ]
+      },
+      {
+        id: 'w-3',
+        companyName: 'CoolAir Technologies',
+        name: 'Chaminda Silva',
+        category: 'AC Technician',
+        nic: '199123456789',
+        phone: '0719929453',
+        district: 'Colombo',
+        experience: '6',
+        rate: 'Rs. 4,500 / service',
+        verified: true,
+        available: true,
+        subscriptionStatus: 'trial',
+        subscriptionPlan: 'Monthly Pro',
+        trialEnds: getFutureDate(58),
+        banned: false,
+        complaintsCount: 0,
+        rating: 4.9,
+        jobsCompleted: 58,
+        bio: 'Certified Inverter AC specialist for domestic and commercial HVAC.',
+        team: []
+      },
+      {
+        id: 'w-4',
+        companyName: 'Senanayake Woodworks & Carpentry',
+        name: 'Lalith Senanayake',
+        category: 'Carpenter',
+        nic: '197823456789',
+        phone: '0719929453',
+        district: 'Kandy',
+        experience: '15',
+        rate: 'Rs. 4,000 / day',
+        verified: true,
+        available: true,
+        subscriptionStatus: 'active',
+        subscriptionPlan: 'Monthly Pro',
+        trialEnds: getFutureDate(90),
+        banned: false,
+        complaintsCount: 0,
+        rating: 5.0,
+        jobsCompleted: 48,
+        bio: 'Traditional and modern timber craftsmanship, doors, windows, and pantry cupboards in Kandy.',
+        team: [
+          { id: 'tm-4', name: 'Roshan Kandy', nic: '199234567890', phone: '0771239999', role: 'Wood Carver' }
+        ]
+      },
+      {
+        id: 'w-5',
+        companyName: 'Southern Masonry & Builders',
+        name: 'Rohan De Silva',
+        category: 'Mason',
+        nic: '198545678901',
+        phone: '0729929453',
+        district: 'Galle',
+        experience: '12',
+        rate: 'Rs. 3,800 / day',
+        verified: true,
+        available: true,
+        subscriptionStatus: 'trial',
+        subscriptionPlan: 'Weekly Flex',
+        trialEnds: getFutureDate(30),
+        banned: false,
+        complaintsCount: 0,
+        rating: 4.7,
+        jobsCompleted: 29,
+        bio: 'Residential concrete casting, bricklaying, and plastering in Galle & Matara.',
+        team: []
+      },
+      {
+        id: 'w-6',
+        companyName: 'Lanka Solar Power Solutions',
+        name: 'Pradeep Kumara',
+        category: 'Solar Installer',
+        nic: '199056789012',
+        phone: '0719929453',
+        district: 'Kurunegala',
+        experience: '7',
+        rate: 'Rs. 5,000 / survey',
+        verified: true,
+        available: true,
+        subscriptionStatus: 'trial',
+        subscriptionPlan: 'Monthly Pro',
+        trialEnds: getFutureDate(50),
+        banned: false,
+        complaintsCount: 0,
+        rating: 4.9,
+        jobsCompleted: 62,
+        bio: 'Grid-tied & off-grid rooftop solar design and CEB net-metering approvals in North Western province.',
+        team: []
+      }
+    ];
+
+    const DEFAULT_REQUESTS = [
+      {
+        id: 'REQ-101',
+        category: 'Electrician',
+        title: 'Main breaker tripping constantly',
+        desc: 'Whenever the AC or refrigerator turns on, the main trip switch goes down.',
+        district: 'Colombo',
+        city: 'Nugegoda',
+        customerName: 'Kasun Fernando',
+        customerPhone: '0719929453',
+        urgent: true,
+        status: 'Matched',
+        assignedWorkerId: 'w-1',
+        assignedWorkerName: 'Apex Electrical Solutions',
+        assignedTeamMember: 'Kasun Bandara (Assistant Wireman)',
+        date: '2026-09-29 14:15'
+      },
+      {
+        id: 'REQ-102',
+        category: 'Plumber',
+        title: 'Overhead water tank leak and ball valve replacement',
+        desc: 'Water tank overflows constantly and pipe union leaking.',
+        district: 'Gampaha',
+        city: 'Kadawatha',
+        customerName: 'Anil Weerasinghe',
+        customerPhone: '0779929453',
+        urgent: false,
+        status: 'Pending',
+        assignedWorkerId: null,
+        assignedWorkerName: null,
+        assignedTeamMember: null,
+        date: '2026-09-29 15:30'
+      }
+    ];
+
+    // State Variables
+    let workers = JSON.parse(localStorage.getItem('navithya_workers')) || DEFAULT_WORKERS;
+    let requests = JSON.parse(localStorage.getItem('navithya_requests')) || DEFAULT_REQUESTS;
+    let reviews = JSON.parse(localStorage.getItem('navithya_reviews')) || REVIEWS_DATA;
+    let complaints = JSON.parse(localStorage.getItem('navithya_complaints')) || COMPLAINTS_DATA;
+    let newsList = NEWS_DATA;
+    let loggedInWorker = null;
+    let currentAssignRequestId = null;
+    let selectedSubscriptionPlan = { type: 'monthly', amount: 1490, title: 'Monthly Pro Plan' };
+
+    function saveState() {
+      localStorage.setItem('navithya_workers', JSON.stringify(workers));
+      localStorage.setItem('navithya_requests', JSON.stringify(requests));
+      localStorage.setItem('navithya_reviews', JSON.stringify(reviews));
+      localStorage.setItem('navithya_complaints', JSON.stringify(complaints));
+    }
+    saveState();
+
+    async function syncToFirebase(collectionName, data) {
+      try {
+        if (window.navithyaFirebaseDB) {
+          await window.navithyaFirebaseDB.collection(collectionName).add({
+            ...data,
+            syncedAt: new Date().toISOString()
+          });
+        }
+      } catch (err) {
+        console.warn(`Firestore sync (${collectionName}):`, err.message);
+      }
+    }
+
+    // Auto-Ban Check Helper: If complaints against a worker >= 5, ban them!
+    function checkAndApplyAutoBan(workerId) {
+      const w = workers.find(item => item.id === workerId);
+      if (!w) return;
+      const count = complaints.filter(c => c.workerId === workerId).length;
+      w.complaintsCount = count;
+      if (count >= 5) {
+        w.banned = true;
+      }
+      saveState();
+    }
+
+    // Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      renderServices();
+      renderPopularRequests();
+      renderVerifiedDirectory();
+      renderNews();
+      renderReviews();
+      populateCategoryDropdowns();
+      populateProviderComplaintDropdown();
+      renderCustomerBookings();
+      renderComplaintList();
+      updateBookingModalProviderDropdown();
+      lucide.createIcons();
+
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'admin') openAdminModal();
+      else if (['customer', 'worker', 'services', 'pricing', 'reviews', 'news', 'complaints'].includes(hash)) switchView(hash);
+      else switchView('home');
+    });
+
+    function switchView(viewName) {
+      document.querySelectorAll('.portal-view').forEach(el => el.classList.add('hidden'));
+      const viewMap = {
+        home: 'viewHome',
+        services: 'viewHome',
+        pricing: 'viewPricing',
+        reviews: 'viewReviews',
+        news: 'viewNews',
+        complaints: 'viewComplaints',
+        customer: 'viewCustomer',
+        worker: 'viewWorker',
+        admin: 'viewAdmin'
+      };
+
+      const targetId = viewMap[viewName] || 'viewHome';
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      if (viewName === 'services') {
+        setTimeout(() => document.getElementById('servicesSection')?.scrollIntoView({ behavior: 'smooth' }), 100);
+      }
+      if (viewName === 'home') {
+        renderServices();
+        renderPopularRequests();
+        renderVerifiedDirectory();
+      }
+      if (viewName === 'reviews') renderReviews();
+      if (viewName === 'news') renderNews();
+      if (viewName === 'complaints') {
+        populateProviderComplaintDropdown();
+        renderComplaintList();
+      }
+      if (viewName === 'customer') renderCustomerBookings();
+      if (viewName === 'worker') switchWorkerSubTab(loggedInWorker ? 'dashboard' : 'register');
+      if (viewName === 'admin') renderAdminDashboard();
+
+      lucide.createIcons();
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    }
+    function toggleUserDropdown() {
+      document.getElementById('userDropdownMenu').classList.toggle('hidden');
+    }
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      const enBtn = document.getElementById('langEnBtn');
+      const siBtn = document.getElementById('langSiBtn');
+      if (lang === 'si') {
+        siBtn.className = "px-2 py-0.5 rounded-full bg-white text-blue-700 shadow-sm font-extrabold transition-all";
+        enBtn.className = "px-2 py-0.5 rounded-full text-gray-500 font-semibold hover:text-blue-600 transition-all";
+      } else {
+        enBtn.className = "px-2 py-0.5 rounded-full bg-white text-blue-700 shadow-sm font-extrabold transition-all";
+        siBtn.className = "px-2 py-0.5 rounded-full text-gray-500 font-semibold hover:text-blue-600 transition-all";
+      }
+      renderServices();
+      renderPopularRequests();
+      renderVerifiedDirectory();
+      lucide.createIcons();
+    }
+
+    // --- Homepage Services & News ---
+    function renderServices() {
+      const grid = document.getElementById('servicesGrid');
+      if (!grid) return;
+      grid.innerHTML = SERVICES_DATA.map(s => {
+        const displayName = currentLang === 'si' ? s.nameSi : s.name;
+        return `
+          <div onclick="openBookingWithService('${s.name}')" 
+               class="group flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border border-gray-100 bg-white hover:border-blue-300 hover:bg-blue-50/40 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md">
+            <div class="w-14 h-14 rounded-2xl ${s.bg} flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+              <i data-lucide="${s.icon}" class="w-7 h-7 ${s.text}"></i>
+            </div>
+            <span class="text-sm sm:text-base font-bold text-gray-800 text-center leading-tight group-hover:text-blue-700 transition-colors">
+              ${displayName}
+            </span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderPopularRequests() {
+      const grid = document.getElementById('popularGrid');
+      if (!grid) return;
+      grid.innerHTML = POPULAR_REQUESTS.map(p => {
+        const displayProblem = currentLang === 'si' ? p.problemSi : p.problem;
+        return `
+          <div onclick="openBookingWithProblem('${p.service}', '${p.problem}')" 
+               class="group flex items-center gap-3.5 p-4 rounded-2xl border border-gray-100 bg-white hover:border-blue-300 hover:bg-blue-50/30 transition-all duration-200 cursor-pointer shadow-sm hover:shadow">
+            <div class="w-12 h-12 rounded-xl ${p.bg} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+              <i data-lucide="${p.icon}" class="w-6 h-6 ${p.text}"></i>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">${p.service}</span>
+              <span class="text-sm sm:text-base font-bold text-gray-900 group-hover:text-blue-700 transition-colors">
+                ${displayProblem}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- Verified Directory (Location & Category Filtered) ---
+    function renderVerifiedDirectory() {
+      const grid = document.getElementById('verifiedDirectoryGrid');
+      if (!grid) return;
+
+      const distFilter = document.getElementById('dirDistrictFilter')?.value || 'ALL';
+      const catFilter = document.getElementById('dirCategoryFilter')?.value || 'ALL';
+
+      let filtered = workers.filter(w => !w.banned);
+      if (distFilter !== 'ALL') {
+        filtered = filtered.filter(w => w.district === distFilter || w.district === 'Other' || w.district === 'All Island');
+      }
+      if (catFilter !== 'ALL') {
+        filtered = filtered.filter(w => w.category === catFilter);
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-12 text-center bg-gray-50 rounded-3xl border border-dashed border-gray-200">
+            <i data-lucide="map-pin-off" class="w-10 h-10 text-gray-300 mx-auto mb-2"></i>
+            <p class="text-sm font-bold text-gray-700">No verified providers registered in this district yet</p>
+            <p class="text-xs text-gray-400 mt-1">Submit a general request or choose a neighboring district.</p>
+            <button onclick="openBookingModal()" class="mt-4 py-2 px-5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow">
+              Submit General Request
+            </button>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      grid.innerHTML = filtered.map(w => {
+        const teamCount = (w.team || []).length;
+        return `
+          <div class="bg-white rounded-3xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-black text-lg shadow-sm">
+                    ${(w.companyName || w.name).charAt(0)}
+                  </div>
+                  <div>
+                    <h4 class="text-base font-black text-gray-900">${w.companyName || w.name}</h4>
+                    <div class="flex items-center gap-1.5 mt-0.5">
+                      <span class="badge-verified px-2 py-0.5 rounded-md text-[10px] font-bold flex items-center gap-1">
+                        <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i> NIC Verified
+                      </span>
+                      ${teamCount > 0 ? `<span class="text-[10px] font-bold bg-blue-50 text-blue-700 px-1.5 py-0.5 rounded">${teamCount} Techs</span>` : ''}
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <div class="flex items-center gap-1 text-amber-500 font-bold text-xs">
+                    ★ ${w.rating || 5.0}
+                  </div>
+                  <div class="text-[10px] text-gray-400">${w.jobsCompleted || 10}+ jobs</div>
+                </div>
+              </div>
+
+              <div class="space-y-1.5 text-xs text-gray-600 mb-4 bg-gray-50/70 p-3 rounded-2xl border border-gray-100">
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-400 font-medium">Trade:</span>
+                  <span class="font-bold text-blue-700">${w.category}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-400 font-medium">District:</span>
+                  <span class="font-bold text-gray-800">📍 ${w.district}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-gray-400 font-medium">Service Rate:</span>
+                  <span class="font-bold text-emerald-700">${w.rate || 'Negotiable'}</span>
+                </div>
+              </div>
+
+              <p class="text-xs text-gray-500 line-clamp-2 mb-4 italic leading-relaxed">
+                "${w.bio || 'Verified tradesman registered on Navithya Lanka.'}"
+              </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 pt-3 border-t border-gray-100">
+              <button onclick="openBookingWithWorker('${w.id}')" class="py-2.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all text-center flex items-center justify-center gap-1">
+                <i data-lucide="calendar" class="w-3.5 h-3.5"></i> Book Provider
+              </button>
+              <a href="https://wa.me/94${w.phone.replace(/^0/, '')}?text=Hello%20${encodeURIComponent(w.companyName || w.name)},%20I%20found%20your%20profile%20on%20Navithya%20LK%20and%20need%20a%20quote%20for%20${encodeURIComponent(w.category)}%20in%20${encodeURIComponent(w.district)}." 
+                 target="_blank" 
+                 class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all text-center flex items-center justify-center gap-1">
+                <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function renderNews(filter = 'ALL') {
+      const fullGrid = document.getElementById('fullNewsGrid');
+      const homePreviewGrid = document.getElementById('homeNewsPreviewGrid');
+      let filtered = newsList;
+      if (filter !== 'ALL') {
+        filtered = newsList.filter(n => n.category.toLowerCase() === filter.toLowerCase() || n.tag.toLowerCase().includes(filter.toLowerCase()));
+      }
+
+      const renderCard = n => {
+        const title = currentLang === 'si' && n.titleSi ? n.titleSi : n.title;
+        return `
+          <div class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between text-xs font-bold mb-3">
+                <span class="px-2.5 py-1 rounded-full bg-blue-50 text-blue-700">${n.tag}</span>
+                <span class="text-gray-400 font-mono">${n.date}</span>
+              </div>
+              <h3 class="text-base font-black text-gray-900 mb-2 leading-snug hover:text-blue-600 cursor-pointer" onclick="openNewsReader('${n.id}')">
+                ${title}
+              </h3>
+              <p class="text-xs text-gray-600 leading-relaxed line-clamp-3 mb-4">${n.summary}</p>
+            </div>
+            <button onclick="openNewsReader('${n.id}')" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1 pt-2 border-t border-gray-100">
+              Read Full Update <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </button>
+          </div>
+        `;
+      };
+
+      if (fullGrid) fullGrid.innerHTML = filtered.map(renderCard).join('');
+      if (homePreviewGrid) homePreviewGrid.innerHTML = newsList.slice(0, 3).map(renderCard).join('');
+      lucide.createIcons();
+    }
+
+    function filterNews(tag) {
+      document.querySelectorAll('.news-filter-btn').forEach(btn => {
+        if (btn.getAttribute('data-filter') === tag) {
+          btn.className = "news-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-sm";
+        } else {
+          btn.className = "news-filter-btn px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 text-gray-700 hover:bg-gray-200";
+        }
+      });
+      renderNews(tag);
+    }
+
+    function openNewsReader(newsId) {
+      const item = newsList.find(n => n.id === newsId);
+      if (!item) return;
+      const title = currentLang === 'si' && item.titleSi ? item.titleSi : item.title;
+      document.getElementById('newsModalContent').innerHTML = `
+        <span class="inline-block px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-bold mb-3">${item.tag}</span>
+        <h2 class="text-xl font-black text-gray-900 mb-2">${title}</h2>
+        <div class="text-xs text-gray-400 mb-4 pb-3 border-b border-gray-100">Published: ${item.date} | Navithya Lanka News</div>
+        <p class="text-sm text-gray-700 leading-relaxed mb-4">${item.summary}</p>
+        <div class="bg-blue-50 p-4 rounded-2xl border border-blue-100 text-xs text-gray-800 leading-relaxed mb-6">${item.content}</div>
+        <button onclick="closeNewsReaderModal()" class="w-full py-2.5 bg-gray-900 text-white rounded-xl text-xs font-bold">Close Article</button>
+      `;
+      document.getElementById('newsReaderModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+    function closeNewsReaderModal() {
+      document.getElementById('newsReaderModal').classList.add('hidden');
+    }
+
+    // --- Ratings & Reviews ---
+    function renderReviews() {
+      const fullGrid = document.getElementById('fullReviewsGrid');
+      const homeGrid = document.getElementById('homeReviewsPreviewGrid');
+      const renderCard = r => `
+        <div class="bg-white rounded-3xl p-5 border border-gray-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <div class="flex text-amber-400 text-sm">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
+              <span class="text-[10px] text-gray-400 font-mono">${r.date}</span>
+            </div>
+            <p class="text-xs text-gray-700 italic mb-4 leading-relaxed">"${r.comment}"</p>
+          </div>
+          <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-black text-gray-900">${r.author}</div>
+              <div class="text-[10px] text-gray-500">${r.district} • ${r.category}</div>
+            </div>
+            <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+              <i data-lucide="check-circle" class="w-3 h-3"></i> Verified
+            </span>
+          </div>
+        </div>
+      `;
+      if (fullGrid) fullGrid.innerHTML = reviews.map(renderCard).join('');
+      if (homeGrid) homeGrid.innerHTML = reviews.slice(0, 3).map(renderCard).join('');
+      lucide.createIcons();
+    }
+
+    function openReviewModal() {
+      document.getElementById('reviewModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+    function closeReviewModal() {
+      document.getElementById('reviewModal').classList.add('hidden');
+    }
+
+    async function handleReviewSubmit(e) {
+      e.preventDefault();
+      const author = document.getElementById('revAuthor').value.trim();
+      const district = document.getElementById('revDistrict').value.trim();
+      const category = document.getElementById('revCategory').value;
+      const workerName = document.getElementById('revWorkerName').value.trim() || 'Verified Technician';
+      const stars = parseInt(document.getElementById('revStars').value);
+      const comment = document.getElementById('revComment').value.trim();
+
+      const newReview = {
+        id: 'rev-' + (reviews.length + 1),
+        author,
+        district,
+        workerName,
+        category,
+        stars,
+        date: new Date().toISOString().slice(0, 10),
+        comment
+      };
+
+      reviews.unshift(newReview);
+      saveState();
+      await syncToFirebase('reviews', newReview);
+      closeReviewModal();
+      renderReviews();
+      showToast('Review Published!', 'Thank you for your rating.');
+    }
+
+    // --- Complaints & 5+ Auto-Ban System ---
+    function populateProviderComplaintDropdown() {
+      const select = document.getElementById('compWorkerSelect');
+      if (!select) return;
+      select.innerHTML = '<option value="">-- Select Provider / Company --</option>' + workers.map(w => `<option value="${w.id}">${w.companyName || w.name} (${w.category})</option>`).join('');
+    }
+
+    async function handleComplaintSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('compName').value.trim();
+      const phone = document.getElementById('compPhone').value.trim();
+      const workerId = document.getElementById('compWorkerSelect').value;
+      const targetWorker = workers.find(w => w.id === workerId);
+      const category = document.getElementById('compCategory').value;
+      const details = document.getElementById('compDetails').value.trim();
+
+      const newId = 'CMP-' + (200 + complaints.length + 1);
+
+      const newComp = {
+        id: newId,
+        name,
+        phone,
+        workerId: workerId || null,
+        workerName: targetWorker ? (targetWorker.companyName || targetWorker.name) : 'General',
+        category,
+        details,
+        status: 'Under Review',
+        resolutionNotes: 'Complaint logged. Under active administrative investigation.',
+        date: new Date().toISOString().slice(0, 10)
+      };
+
+      complaints.unshift(newComp);
+      saveState();
+      await syncToFirebase('complaints', newComp);
+
+      // Trigger 5+ Complaint Auto-Ban check!
+      if (workerId) {
+        checkAndApplyAutoBan(workerId);
+      }
+
+      document.getElementById('complaintForm').reset();
+      document.getElementById('compLookupPhone').value = phone;
+      renderComplaintList();
+      showToast('Complaint Lodged', `Ticket ${newId} registered. Admin is investigating.`);
+    }
+
+    function renderComplaintList() {
+      const container = document.getElementById('complaintsListArea');
+      if (!container) return;
+      const phone = document.getElementById('compLookupPhone')?.value.trim();
+      let list = complaints;
+      if (phone) list = complaints.filter(c => c.phone.includes(phone));
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="text-xs text-gray-400 py-3 text-center">No complaints found for this phone number.</div>`;
+        return;
+      }
+
+      container.innerHTML = list.map(c => `
+        <div class="p-4 rounded-2xl border border-gray-200 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2 mb-1">
+              <span class="font-mono text-xs font-bold text-rose-700">${c.id}</span>
+              <span class="text-xs font-bold text-gray-900">${c.category}</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded ${c.status === 'Resolved' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                ${c.status}
+              </span>
+            </div>
+            <div class="text-xs text-gray-600">${c.details}</div>
+            <div class="text-[11px] text-gray-400 mt-1">Provider: <strong>${c.workerName}</strong> | Notes: <em>${c.resolutionNotes || 'In Progress'}</em></div>
+          </div>
+          <a href="https://wa.me/94719929453?text=Hello%20Admin,%20checking%20status%20of%20complaint%20ticket%20${c.id}" target="_blank" class="py-1.5 px-3 bg-emerald-600 text-white rounded-xl text-xs font-bold flex items-center gap-1 shrink-0">
+            <i data-lucide="message-circle" class="w-3 h-3"></i> WhatsApp Help
+          </a>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function populateCategoryDropdowns() {
+      const selects = ['bCategory', 'wCategory', 'revCategory', 'adminNewWorkerCategory', 'adminWorkerCategoryFilter'];
+      selects.forEach(id => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        if (id === 'adminWorkerCategoryFilter') {
+          el.innerHTML = '<option value="ALL">All Trades</option>' + SERVICES_DATA.map(s => `<option value="${s.name}">${s.name}</option>`).join('');
+        } else {
+          el.innerHTML = SERVICES_DATA.map(s => `<option value="${s.name}">${s.name} (${s.nameSi})</option>`).join('');
+        }
+      });
+    }
+
+    // --- Bookings ---
+    function openBookingModal() {
+      document.getElementById('bookingModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+    function openBookingWithService(serviceName) {
+      openBookingModal();
+      const select = document.getElementById('bCategory');
+      if (select) select.value = serviceName;
+    }
+    function openBookingWithProblem(serviceName, problemName) {
+      openBookingModal();
+      const catSelect = document.getElementById('bCategory');
+      const titleInput = document.getElementById('bTitle');
+      if (catSelect) catSelect.value = serviceName;
+      if (titleInput) titleInput.value = problemName;
+    }
+
+    async function handleBookingSubmit(e) {
+      e.preventDefault();
+      const category = document.getElementById('bCategory').value;
+      const title = document.getElementById('bTitle').value;
+      const district = document.getElementById('bDistrict').value;
+      const city = document.getElementById('bCity').value;
+      const customerName = document.getElementById('bCustomerName').value;
+      const customerPhone = document.getElementById('bCustomerPhone').value;
+      const desc = document.getElementById('bDesc').value;
+      const urgent = document.getElementById('bUrgent').checked;
+      const preferredWorkerId = document.getElementById('bPreferredWorker')?.value || null;
+
+      const newId = 'REQ-' + (100 + requests.length + 1);
+      const now = new Date();
+      const dateStr = now.toISOString().replace('T', ' ').slice(0, 16);
+
+      let targetWorker = null;
+      if (preferredWorkerId) {
+        targetWorker = workers.find(w => w.id === preferredWorkerId && !w.banned);
+      }
+
+      const newRequest = {
+        id: newId,
+        category,
+        title,
+        desc,
+        district,
+        city,
+        customerName,
+        customerPhone,
+        urgent,
+        status: targetWorker ? 'Matched' : 'Pending',
+        assignedWorkerId: targetWorker ? targetWorker.id : null,
+        assignedWorkerName: targetWorker ? (targetWorker.companyName || targetWorker.name) : null,
+        assignedTeamMember: null,
+        date: dateStr
+      };
+
+      requests.unshift(newRequest);
+      saveState();
+      await syncToFirebase('requests', newRequest);
+
+      closeBookingModal();
+      document.getElementById('bookingForm').reset();
+
+      if (targetWorker) {
+        showToast('Worker Matched!', `Your request is assigned directly to ${targetWorker.companyName || targetWorker.name}.`);
+        const msg = `Hello ${targetWorker.companyName || targetWorker.name}, I have booked your services via Navithya LK for ${category} (${newId}) in ${city}, ${district}. My requirement: "${title}". Please contact me at ${customerPhone}.`;
+        window.open(`https://wa.me/94${targetWorker.phone.replace(/^0/, '')}?text=${encodeURIComponent(msg)}`, '_blank');
+      } else {
+        showToast('Booking Submitted!', `Request ${newId} dispatched to verified ${category} providers in ${district}.`);
+      }
+
+      const phoneFilter = document.getElementById('customerPhoneFilter');
+      if (phoneFilter) phoneFilter.value = customerPhone;
+      switchView('customer');
+    }
+
+    function renderCustomerBookings() {
+      const container = document.getElementById('customerBookingsList');
+      if (!container) return;
+
+      const phoneFilter = document.getElementById('customerPhoneFilter')?.value.trim();
+      let filtered = requests;
+      if (phoneFilter) filtered = requests.filter(r => r.customerPhone.includes(phoneFilter));
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 bg-gray-50 rounded-2xl border border-gray-100">
+            <i data-lucide="inbox" class="w-10 h-10 text-gray-300 mx-auto mb-3"></i>
+            <p class="text-sm font-bold text-gray-600">No bookings found</p>
+            <p class="text-xs text-gray-400 mt-1">Submit a new request or check your phone number</p>
+          </div>
+        `;
+        lucide.createIcons();
+        return;
+      }
+
+      container.innerHTML = filtered.map(r => {
+        let statusBadge = '';
+        if (r.status === 'Pending') statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span> Matching Provider (~30m)</span>';
+        else if (r.status === 'Matched') statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800 flex items-center gap-1"><i data-lucide="check" class="w-3.5 h-3.5"></i> Provider Matched</span>';
+        else if (r.status === 'In Progress') statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-purple-100 text-purple-800 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span> In Progress</span>';
+        else if (r.status === 'Completed') statusBadge = '<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 flex items-center gap-1"><i data-lucide="check-check" class="w-3.5 h-3.5"></i> Completed</span>';
+
+        const assignedWorker = workers.find(w => w.id === r.assignedWorkerId);
+
+        return `
+          <div class="bg-white rounded-2xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-all">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3 mb-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono font-bold text-gray-500">${r.id}</span>
+                <span class="text-gray-300">•</span>
+                <span class="text-xs font-bold text-blue-600">${r.category}</span>
+                ${r.urgent ? '<span class="text-[10px] font-black uppercase px-2 py-0.5 bg-red-100 text-red-700 rounded-md">Urgent</span>' : ''}
+              </div>
+              <div class="flex items-center gap-3">
+                ${statusBadge}
+                <button onclick="deleteBookingRequest('${r.id}')" title="Delete Booking Request" class="text-gray-400 hover:text-red-600 p-1 rounded-lg hover:bg-red-50">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <h4 class="text-base font-bold text-gray-900 mb-1">${r.title}</h4>
+            <p class="text-xs text-gray-500 mb-3">${r.desc || 'No additional notes'}</p>
+            
+            <div class="text-xs text-gray-600 flex flex-wrap gap-4 mb-4">
+              <span class="flex items-center gap-1"><i data-lucide="map-pin" class="w-3.5 h-3.5 text-gray-400"></i> ${r.city}, ${r.district}</span>
+              <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5 text-gray-400"></i> ${r.date}</span>
+            </div>
+
+            ${assignedWorker ? `
+              <div class="bg-emerald-50/70 border border-emerald-200 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center font-bold text-sm">
+                    ${(assignedWorker.companyName || assignedWorker.name).charAt(0)}
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-sm font-black text-gray-900">${assignedWorker.companyName || assignedWorker.name}</span>
+                      <span class="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded flex items-center gap-0.5">
+                        <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i> NIC Verified
+                      </span>
+                    </div>
+                    <div class="text-xs text-gray-600">
+                      Lead: ${assignedWorker.name} | Tel: ${assignedWorker.phone}
+                      ${r.assignedTeamMember ? ` | <span class="text-blue-700 font-bold">Crew Tech: ${r.assignedTeamMember}</span>` : ''}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <a href="https://wa.me/94${assignedWorker.phone.replace(/^0/, '')}?text=Hello%20${encodeURIComponent(assignedWorker.companyName || assignedWorker.name)},%20I%20am%20${encodeURIComponent(r.customerName)}%20from%20Navithya%20regarding%20booking%20${r.id}" target="_blank" 
+                     class="py-1.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp Provider
+                  </a>
+                  <a href="tel:${assignedWorker.phone}" class="py-1.5 px-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-xs font-bold flex items-center gap-1">
+                    <i data-lucide="phone" class="w-3.5 h-3.5"></i> Call
+                  </a>
+                </div>
+              </div>
+            ` : `
+              <div class="bg-gray-50 border border-dashed border-gray-200 rounded-xl p-3 text-center text-xs text-gray-500">
+                ⏳ Dispatched to verified ${r.category} specialists in ${r.district}. You will receive a direct contact shortly.
+              </div>
+            `}
+          </div>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function deleteBookingRequest(reqId) {
+      if (!confirm(`Delete request ${reqId}?`)) return;
+      requests = requests.filter(r => r.id !== reqId);
+      saveState();
+      renderCustomerBookings();
+      renderAdminDashboard();
+      showToast('Deleted', `Request ${reqId} deleted.`);
+    }
+
+    // --- Worker Registration, Whitelabel, Team & Auto-Ban Handling ---
+    function switchWorkerSubTab(tab) {
+      const regTab = document.getElementById('workerTabRegister');
+      const dashTab = document.getElementById('workerTabDashboard');
+      const regPane = document.getElementById('workerRegisterPane');
+      const dashPane = document.getElementById('workerDashboardPane');
+
+      if (tab === 'register') {
+        regTab.className = "py-2 px-6 rounded-xl text-sm font-bold bg-white text-blue-700 shadow-sm transition-all";
+        dashTab.className = "py-2 px-6 rounded-xl text-sm font-bold text-gray-600 hover:text-gray-900 transition-all";
+        regPane.classList.remove('hidden');
+        dashPane.classList.add('hidden');
+      } else {
+        dashTab.className = "py-2 px-6 rounded-xl text-sm font-bold bg-white text-blue-700 shadow-sm transition-all";
+        regTab.className = "py-2 px-6 rounded-xl text-sm font-bold text-gray-600 hover:text-gray-900 transition-all";
+        dashPane.classList.remove('hidden');
+        regPane.classList.add('hidden');
+      }
+      lucide.createIcons();
+    }
+
+    async function handleWorkerRegister(e) {
+      e.preventDefault();
+      const companyName = document.getElementById('wCompanyName').value.trim();
+      const name = document.getElementById('wName').value.trim();
+      const nic = document.getElementById('wNic').value.trim();
+      const phone = document.getElementById('wPhone').value.trim();
+      const category = document.getElementById('wCategory').value;
+      const district = document.getElementById('wDistrict').value;
+      const experience = document.getElementById('wExperience').value || '1';
+      const rate = document.getElementById('wRate').value || 'Negotiable';
+      const bio = document.getElementById('wBio').value;
+
+      const newWorker = {
+        id: 'w-' + (workers.length + 1),
+        companyName: companyName || name,
+        name,
+        nic,
+        phone,
+        category,
+        district,
+        experience,
+        rate,
+        bio,
+        verified: false,
+        available: true,
+        subscriptionStatus: 'trial',
+        subscriptionPlan: 'Monthly Pro (2-Month Free Trial)',
+        trialEnds: getFutureDate(60),
+        banned: false,
+        complaintsCount: 0,
+        team: [],
+        rating: 5.0,
+        jobsCompleted: 0
+      };
+
+      workers.unshift(newWorker);
+      saveState();
+      await syncToFirebase('workers', newWorker);
+
+      document.getElementById('workerRegistrationForm').reset();
+      showToast('Registration Successful!', `Welcome ${companyName}! 2 Months Free Trial is active.`);
+
+      loggedInWorker = newWorker;
+      applyCompanyBranding(newWorker);
+      switchWorkerSubTab('dashboard');
+      renderWorkerDashboard();
+    }
+
+    function handleWorkerLogin() {
+      const idInput = document.getElementById('workerLoginIdentifier')?.value.trim();
+      if (!idInput) {
+        alert('Please enter your phone number or NIC');
+        return;
+      }
+      const worker = workers.find(w => w.phone.includes(idInput) || w.nic.toLowerCase() === idInput.toLowerCase());
+      if (worker) {
+        loggedInWorker = worker;
+        applyCompanyBranding(worker);
+        renderWorkerDashboard();
+        showToast('Login Successful', `Welcome back, ${worker.companyName || worker.name}!`);
+      } else {
+        alert('Provider not found with that Phone/NIC.');
+      }
+    }
+
+    function applyCompanyBranding(worker) {
+      const brandName = document.getElementById('headerBrandName');
+      const brandTag = document.getElementById('headerBrandTag');
+      const brandSub = document.getElementById('headerBrandSub');
+      const brandIcon = document.getElementById('headerBrandIcon');
+
+      if (worker && worker.companyName) {
+        brandName.textContent = worker.companyName;
+        brandTag.textContent = worker.banned ? "SUSPENDED" : "VERIFIED";
+        brandTag.className = worker.banned ? "text-[10px] font-black px-1.5 py-0.5 rounded bg-red-100 text-red-800" : "text-[10px] font-black px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800";
+        brandSub.textContent = `${worker.category} Services | ${worker.district}`;
+        brandIcon.className = worker.banned ? "w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md" : "w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center text-white shadow-md";
+      } else {
+        brandName.textContent = "Navithya";
+        brandTag.textContent = "LK";
+        brandTag.className = "text-[10px] font-bold px-1.5 py-0.5 rounded bg-blue-100 text-blue-700";
+        brandSub.textContent = "Verified Trades & Services";
+        brandIcon.className = "w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-md";
+      }
+    }
+
+    function renderWorkerDashboard() {
+      const noticeArea = document.getElementById('workerSuspensionNoticeArea');
+      const profileArea = document.getElementById('workerProfileStatusArea');
+      const teamSection = document.getElementById('workerTeamSection');
+      const jobsArea = document.getElementById('workerJobsArea');
+      const badgeArea = document.getElementById('workerSubscriptionBadgeArea');
+      if (!loggedInWorker) return;
+
+      // Update banned status dynamically
+      checkAndApplyAutoBan(loggedInWorker.id);
+      const isBanned = loggedInWorker.banned;
+
+      // 1. SUSPENSION / AUTO-BAN NOTICE (If 5+ complaints)
+      if (isBanned) {
+        noticeArea.innerHTML = `
+          <div class="bg-red-50 border-2 border-red-500 rounded-3xl p-6 mb-6 shadow-lg">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center shrink-0">
+                  <i data-lucide="shield-alert" class="w-7 h-7"></i>
+                </div>
+                <div>
+                  <span class="inline-block px-2.5 py-0.5 bg-red-200 text-red-900 text-xs font-black rounded-full uppercase mb-1">
+                    🚫 Account Temporarily Suspended (5+ Complaints)
+                  </span>
+                  <h3 class="text-lg font-black text-red-950">System Auto-Ban in Effect</h3>
+                  <p class="text-xs text-red-800 leading-relaxed mt-1">
+                    Your account has received <strong>${loggedInWorker.complaintsCount || 5} complaints</strong> from customers. Direct customer matching is temporarily disabled. Please contact the Admin Help Desk to review and unban your account.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Visible WhatsApp and Call Admin Action Buttons -->
+              <div class="flex flex-wrap sm:flex-col gap-2 w-full sm:w-auto shrink-0">
+                <a href="https://wa.me/94719929453?text=Hello%20Admin,%20my%20provider%20account%20(${encodeURIComponent(loggedInWorker.companyName || loggedInWorker.name)})%20is%20temporarily%20banned%20due%20to%20complaints.%20Please%20review%20and%20unban%20my%20account." 
+                   target="_blank" 
+                   class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black flex items-center justify-center gap-2 shadow-md transition-all">
+                  <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp Admin (Unban)
+                </a>
+                <a href="tel:0719929453" class="w-full py-2.5 px-4 rounded-xl bg-gray-900 hover:bg-gray-800 text-white text-xs font-black flex items-center justify-center gap-2 shadow-md transition-all">
+                  <i data-lucide="phone-call" class="w-4 h-4"></i> Call Admin: 0719929453
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        noticeArea.innerHTML = '';
+      }
+
+      // Subscription badge
+      let subBadge = '';
+      if (loggedInWorker.subscriptionStatus === 'trial') {
+        subBadge = `<span class="badge-trial px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">🎁 2-Month Free Trial (Ends: ${loggedInWorker.trialEnds || '60 days'})</span>`;
+      } else if (loggedInWorker.subscriptionStatus === 'active') {
+        subBadge = `<span class="badge-active px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1"><i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Subscription Active</span>`;
+      }
+      if (badgeArea) badgeArea.innerHTML = subBadge;
+
+      profileArea.innerHTML = `
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-3xl p-6 mb-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-2xl font-black text-gray-900">${loggedInWorker.companyName || loggedInWorker.name}</h3>
+                ${isBanned 
+                  ? '<span class="badge-banned px-2.5 py-0.5 rounded-full text-xs font-bold flex items-center gap-1">🚫 Temporarily Banned</span>'
+                  : (loggedInWorker.verified ? '<span class="badge-verified px-2.5 py-0.5 rounded-full text-xs font-bold flex items-center gap-1"><i data-lucide="shield-check" class="w-3.5 h-3.5"></i> NIC Verified</span>' : '<span class="badge-pending px-2.5 py-0.5 rounded-full text-xs font-bold flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> Pending</span>')
+                }
+              </div>
+              <div class="text-xs text-gray-600 mt-1.5 flex flex-wrap gap-3">
+                <span>Contact Person: <strong>${loggedInWorker.name}</strong></span>
+                <span>Phone: <strong>${loggedInWorker.phone}</strong></span>
+                <span>District: <strong>📍 ${loggedInWorker.district}</strong></span>
+                <span>Trade: <strong>${loggedInWorker.category}</strong></span>
+                <span>Complaints: <strong>${loggedInWorker.complaintsCount || 0}</strong></span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="openPaymentGatewayModal('monthly', 1490)" class="py-2 px-3.5 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white shadow-sm">
+                💳 Plan
+              </button>
+              <button onclick="toggleWorkerAvailability()" class="py-2 px-3.5 rounded-xl text-xs font-bold ${loggedInWorker.available ? 'bg-emerald-600 text-white' : 'bg-gray-300 text-gray-700'}">
+                ${loggedInWorker.available ? '🟢 Available' : '🔴 Busy'}
+              </button>
+              <button onclick="logoutWorker()" class="py-2 px-3 rounded-xl border border-gray-300 hover:bg-gray-100 text-xs font-bold text-gray-700">
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // 2. TEAM / CREW MANAGEMENT SECTION
+      const teamList = loggedInWorker.team || [];
+      teamSection.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <h3 class="text-lg font-black text-gray-900 flex items-center gap-2">
+              <i data-lucide="users" class="w-5 h-5 text-blue-600"></i> My Crew & Technicians (${teamList.length})
+            </h3>
+            <p class="text-xs text-gray-500">Register assistants and technicians in your company to dispatch to customer jobs.</p>
+          </div>
+        </div>
+
+        <!-- Add Team Member Form -->
+        <form onsubmit="handleAddTeamMember(event)" class="bg-gray-50 p-4 rounded-2xl border border-gray-200 mb-5 grid grid-cols-1 sm:grid-cols-4 gap-2.5">
+          <input type="text" id="tmName" required placeholder="Crew Name (e.g. Kasun)" class="px-3 py-2 rounded-xl border text-xs bg-white">
+          <input type="text" id="tmNic" required placeholder="NIC (e.g. 199512345678)" class="px-3 py-2 rounded-xl border text-xs bg-white">
+          <input type="tel" id="tmPhone" required placeholder="Phone (e.g. 0771234567)" class="px-3 py-2 rounded-xl border text-xs bg-white">
+          <div class="flex gap-1.5">
+            <input type="text" id="tmRole" required placeholder="Role (e.g. Assistant)" class="flex-1 px-3 py-2 rounded-xl border text-xs bg-white">
+            <button type="submit" class="py-2 px-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow-sm">
+              + Add
+            </button>
+          </div>
+        </form>
+
+        <!-- Team Members List -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          ${teamList.length === 0 ? `
+            <div class="col-span-2 text-xs text-gray-400 py-3 text-center bg-gray-50 rounded-xl border border-dashed border-gray-200">
+              No additional crew members registered yet. Add your assistant technicians above!
+            </div>
+          ` : teamList.map(t => `
+            <div class="p-3.5 bg-white border border-gray-200 rounded-2xl shadow-sm flex items-center justify-between">
+              <div>
+                <div class="font-bold text-xs text-gray-900">${t.name} <span class="text-[10px] font-normal text-blue-600 bg-blue-50 px-1.5 py-0.2 rounded">${t.role}</span></div>
+                <div class="text-[11px] text-gray-500">NIC: ${t.nic} | Tel: ${t.phone}</div>
+              </div>
+              <button onclick="deleteTeamMember('${t.id}')" title="Remove Member" class="text-gray-400 hover:text-red-600 p-1">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+
+      // 3. JOBS SECTION (STRICT LOCATION & DIRECT ASSIGNMENT FILTERING)
+      const myAssignedJobs = requests.filter(r => r.assignedWorkerId === loggedInWorker.id);
+      
+      // Local inquiries: Unassigned requests matching this worker's district & trade
+      const localInquiries = requests.filter(r => 
+        r.assignedWorkerId === null && 
+        r.status === 'Pending' && 
+        (r.district === loggedInWorker.district || loggedInWorker.district === 'All Island' || loggedInWorker.district === 'Other') && 
+        r.category === loggedInWorker.category
+      );
+
+      jobsArea.innerHTML = `
+        <!-- Section A: Directly Assigned Jobs -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between mb-3">
+            <h4 class="text-sm font-black text-gray-900 uppercase tracking-wider flex items-center gap-2">
+              <i data-lucide="briefcase" class="w-4 h-4 text-blue-600"></i> Jobs Assigned to You & Your Crew (${myAssignedJobs.length})
+            </h4>
+          </div>
+
+          ${myAssignedJobs.length === 0 ? `
+            <div class="p-6 bg-gray-50 rounded-2xl border border-gray-200 text-center text-xs text-gray-500">
+              No direct jobs assigned to your company currently. New assigned jobs will appear here.
+            </div>
+          ` : `
+            <div class="space-y-3">
+              ${myAssignedJobs.map(j => `
+                <div class="p-4 rounded-2xl border border-gray-200 bg-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="text-xs font-mono font-bold text-blue-600">${j.id}</span>
+                      <span class="text-xs font-bold text-gray-800">${j.title}</span>
+                      <span class="text-[10px] font-bold px-2 py-0.5 bg-blue-100 text-blue-700 rounded">${j.status}</span>
+                      ${j.urgent ? '<span class="text-[9px] font-black uppercase px-1.5 py-0.2 bg-red-100 text-red-700 rounded">Urgent</span>' : ''}
+                    </div>
+                    <div class="text-xs text-gray-600">Customer: <strong>${j.customerName}</strong> (${j.customerPhone})</div>
+                    <div class="text-xs text-gray-500">📍 Location: ${j.city}, ${j.district} | ${j.date}</div>
+                    ${j.desc ? `<div class="text-xs text-gray-500 mt-1 italic">"${j.desc}"</div>` : ''}
+                    ${j.assignedTeamMember ? `<div class="text-xs text-blue-700 font-bold mt-1">👨‍🔧 Dispatched Tech: ${j.assignedTeamMember}</div>` : ''}
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-2 shrink-0">
+                    <a href="https://wa.me/94${j.customerPhone.replace(/^0/, '')}?text=Hello%20${encodeURIComponent(j.customerName)},%20I%20am%20${encodeURIComponent(loggedInWorker.companyName || loggedInWorker.name)}%20from%20Navithya%20regarding%20job%20${j.id}" target="_blank" 
+                       class="py-2 px-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
+                      <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> WhatsApp Customer
+                    </a>
+
+                    ${j.status !== 'Completed' ? `
+                      <button onclick="updateJobStatus('${j.id}', 'In Progress')" class="py-2 px-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold">
+                        Start Job
+                      </button>
+                      <button onclick="updateJobStatus('${j.id}', 'Completed')" class="py-2 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold">
+                        Complete
+                      </button>
+                    ` : `
+                      <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200">
+                        ✓ Completed
+                      </span>
+                    `}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
+        </div>
+
+        <!-- Section B: Local District Inquiries & Leads (Strictly Filtered by Location) -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <h4 class="text-sm font-black text-emerald-950 uppercase tracking-wider flex items-center gap-2">
+                <i data-lucide="map-pin" class="w-4 h-4 text-emerald-600"></i> Open Job Leads in Your District (📍 ${loggedInWorker.district}) - ${localInquiries.length}
+              </h4>
+              <p class="text-xs text-gray-500">Unassigned customer requests in ${loggedInWorker.district} for ${loggedInWorker.category}. You can claim them immediately.</p>
+            </div>
+          </div>
+
+          ${localInquiries.length === 0 ? `
+            <div class="p-6 bg-emerald-50/50 rounded-2xl border border-dashed border-emerald-200 text-center text-xs text-gray-600">
+              <i data-lucide="check-circle" class="w-6 h-6 text-emerald-500 mx-auto mb-1"></i>
+              All customer requests in ${loggedInWorker.district} are currently matched! New local requests will appear here.
+            </div>
+          ` : `
+            <div class="space-y-3">
+              ${localInquiries.map(l => `
+                <div class="p-4 rounded-2xl border border-emerald-200 bg-emerald-50/40 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <div class="flex items-center gap-2 mb-1">
+                      <span class="text-xs font-mono font-bold text-emerald-800">${l.id}</span>
+                      <span class="text-xs font-bold text-gray-900">${l.title}</span>
+                      ${l.urgent ? '<span class="text-[9px] font-black uppercase px-1.5 py-0.2 bg-red-100 text-red-700 rounded">Urgent</span>' : ''}
+                    </div>
+                    <div class="text-xs text-gray-700">Customer: <strong>${l.customerName}</strong> (${l.customerPhone})</div>
+                    <div class="text-xs text-gray-500">📍 Location: ${l.city}, ${l.district} | ${l.date}</div>
+                    ${l.desc ? `<div class="text-xs text-gray-600 mt-1 italic">"${l.desc}"</div>` : ''}
+                  </div>
+
+                  <div class="flex items-center gap-2 shrink-0">
+                    <button onclick="claimLocalJob('${l.id}')" class="py-2.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-black shadow-sm transition-all flex items-center gap-1.5">
+                      <i data-lucide="check" class="w-4 h-4"></i> Accept & Claim Job (වැඩය බාරගන්න)
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          `}
+        </div>
+      `;
+
+      lucide.createIcons();
+    }
+
+    function claimLocalJob(jobId) {
+      if (!loggedInWorker) return;
+      const req = requests.find(r => r.id === jobId);
+      if (!req) return;
+
+      req.assignedWorkerId = loggedInWorker.id;
+      req.assignedWorkerName = loggedInWorker.companyName || loggedInWorker.name;
+      req.status = 'Matched';
+      saveState();
+      renderWorkerDashboard();
+
+      showToast('Job Claimed! 🛠️', `Job ${jobId} is now assigned to ${loggedInWorker.companyName || loggedInWorker.name}.`);
+
+      const msg = `Hello ${req.customerName}, I am ${loggedInWorker.companyName || loggedInWorker.name} (${loggedInWorker.category} in ${loggedInWorker.district}) from Navithya LK. I have accepted your service request (${jobId}) for "${req.title}". I will attend to your requirement.`;
+      window.open(`https://wa.me/94${req.customerPhone.replace(/^0/, '')}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // Team Member Actions
+    function handleAddTeamMember(e) {
+      e.preventDefault();
+      if (!loggedInWorker) return;
+      const name = document.getElementById('tmName').value.trim();
+      const nic = document.getElementById('tmNic').value.trim();
+      const phone = document.getElementById('tmPhone').value.trim();
+      const role = document.getElementById('tmRole').value.trim();
+
+      if (!loggedInWorker.team) loggedInWorker.team = [];
+      const newMember = { id: 'tm-' + (loggedInWorker.team.length + 1), name, nic, phone, role };
+      loggedInWorker.team.push(newMember);
+
+      const idx = workers.findIndex(w => w.id === loggedInWorker.id);
+      if (idx !== -1) workers[idx].team = loggedInWorker.team;
+      saveState();
+      renderWorkerDashboard();
+      showToast('Team Member Added', `${name} added to your company team.`);
+    }
+
+    function deleteTeamMember(tmId) {
+      if (!loggedInWorker || !confirm('Remove this team member?')) return;
+      loggedInWorker.team = loggedInWorker.team.filter(t => t.id !== tmId);
+      const idx = workers.findIndex(w => w.id === loggedInWorker.id);
+      if (idx !== -1) workers[idx].team = loggedInWorker.team;
+      saveState();
+      renderWorkerDashboard();
+      showToast('Removed', 'Team member removed.');
+    }
+
+    function toggleWorkerAvailability() {
+      if (!loggedInWorker) return;
+      loggedInWorker.available = !loggedInWorker.available;
+      const idx = workers.findIndex(w => w.id === loggedInWorker.id);
+      if (idx !== -1) workers[idx].available = loggedInWorker.available;
+      saveState();
+      renderWorkerDashboard();
+    }
+
+    function logoutWorker() {
+      loggedInWorker = null;
+      applyCompanyBranding(null);
+      switchWorkerSubTab('register');
+      showToast('Logged Out', 'Provider account logged out.');
+    }
+
+    function updateJobStatus(jobId, newStatus) {
+      const req = requests.find(r => r.id === jobId);
+      if (req) {
+        req.status = newStatus;
+        saveState();
+        renderWorkerDashboard();
+        showToast('Status Updated', `Job ${jobId} is now marked as ${newStatus}`);
+      }
+    }
+
+    // --- Payment Simulation ---
+    function openPaymentGatewayModal(planType, amount) {
+      const planNames = { weekly: 'Weekly Flex Plan', monthly: 'Monthly Pro Plan', yearly: 'Yearly Ultimate Plan' };
+      selectedSubscriptionPlan = { type: planType, amount, title: planNames[planType] || 'Monthly Pro Plan' };
+      document.getElementById('paymentSelectedPlanTitle').textContent = selectedSubscriptionPlan.title;
+      document.getElementById('paymentSelectedAmount').textContent = `Rs. ${amount.toLocaleString()}`;
+      if (loggedInWorker) document.getElementById('paymentWorkerPhone').value = loggedInWorker.phone;
+      document.getElementById('paymentGatewayModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+    function closePaymentGatewayModal() {
+      document.getElementById('paymentGatewayModal').classList.add('hidden');
+    }
+
+    async function handleProcessPayment(e) {
+      e.preventDefault();
+      const phone = document.getElementById('paymentWorkerPhone').value.trim();
+      const targetWorker = workers.find(w => w.phone.includes(phone) || (loggedInWorker && loggedInWorker.phone === w.phone));
+
+      if (targetWorker) {
+        targetWorker.subscriptionStatus = 'active';
+        targetWorker.subscriptionPlan = selectedSubscriptionPlan.title;
+        targetWorker.trialEnds = getFutureDate(selectedSubscriptionPlan.type === 'yearly' ? 365 : 30);
+        saveState();
+        await syncToFirebase('payments', {
+          workerId: targetWorker.id,
+          workerName: targetWorker.companyName || targetWorker.name,
+          phone: targetWorker.phone,
+          plan: selectedSubscriptionPlan.title,
+          amount: selectedSubscriptionPlan.amount,
+          date: new Date().toISOString()
+        });
+      }
+
+      closePaymentGatewayModal();
+      showToast('Payment Successful! 🎉', `Plan activated for ${selectedSubscriptionPlan.title}.`);
+      if (loggedInWorker) renderWorkerDashboard();
+      renderAdminDashboard();
+    }
+
+    // --- Administrator Panel ---
+    function openAdminModal() {
+      if (sessionStorage.getItem('navithya_admin_logged') === 'true') {
+        switchView('admin');
+      } else {
+        document.getElementById('adminLoginModal').classList.remove('hidden');
+        lucide.createIcons();
+      }
+    }
+    function closeAdminModal() {
+      document.getElementById('adminLoginModal').classList.add('hidden');
+    }
+
+    function handleAdminLogin(e) {
+      e.preventDefault();
+      const u = document.getElementById('adminUser').value.trim();
+      const p = document.getElementById('adminPass').value.trim();
+      if (u === 'admin' && p === 'admin') {
+        sessionStorage.setItem('navithya_admin_logged', 'true');
+        closeAdminModal();
+        switchView('admin');
+        showToast('Admin Authenticated', 'Welcome Administrator!');
+      } else {
+        document.getElementById('adminLoginError').classList.remove('hidden');
+      }
+    }
+
+    function logoutAdmin() {
+      sessionStorage.removeItem('navithya_admin_logged');
+      switchView('home');
+      showToast('Logged Out', 'You have been logged out.');
+    }
+
+    function switchAdminSubTab(tab) {
+      const btnReq = document.getElementById('adminTabBtnRequests');
+      const btnWrk = document.getElementById('adminTabBtnWorkers');
+      const btnCmp = document.getElementById('adminTabBtnComplaints');
+      const paneReq = document.getElementById('adminPaneRequests');
+      const paneWrk = document.getElementById('adminPaneWorkers');
+      const paneCmp = document.getElementById('adminPaneComplaints');
+
+      [btnReq, btnWrk, btnCmp].forEach(b => b.className = "py-2.5 px-5 rounded-xl text-sm font-bold text-gray-600 hover:text-gray-900 hover:bg-gray-100 flex items-center gap-2");
+      [paneReq, paneWrk, paneCmp].forEach(p => p.classList.add('hidden'));
+
+      if (tab === 'requests') {
+        btnReq.className = "py-2.5 px-5 rounded-xl text-sm font-bold bg-blue-600 text-white shadow-sm flex items-center gap-2";
+        paneReq.classList.remove('hidden');
+        renderAdminRequests();
+      } else if (tab === 'workers') {
+        btnWrk.className = "py-2.5 px-5 rounded-xl text-sm font-bold bg-blue-600 text-white shadow-sm flex items-center gap-2";
+        paneWrk.classList.remove('hidden');
+        renderAdminWorkers();
+      } else if (tab === 'complaints') {
+        btnCmp.className = "py-2.5 px-5 rounded-xl text-sm font-bold bg-blue-600 text-white shadow-sm flex items-center gap-2";
+        paneCmp.classList.remove('hidden');
+        renderAdminComplaints();
+      }
+      lucide.createIcons();
+    }
+
+    function renderAdminDashboard() {
+      // Re-verify auto-ban triggers on all workers
+      workers.forEach(w => checkAndApplyAutoBan(w.id));
+
+      document.getElementById('statTotalRequests').textContent = requests.length;
+      document.getElementById('statPendingRequests').textContent = requests.filter(r => r.status === 'Pending').length;
+      document.getElementById('statVerifiedWorkers').textContent = workers.filter(w => w.verified && !w.banned).length;
+      document.getElementById('statComplaintsCount').textContent = complaints.length;
+
+      renderAdminRequests();
+      renderAdminWorkers();
+      renderAdminComplaints();
+    }
+
+    function renderAdminRequests() {
+      const tbody = document.getElementById('adminRequestsTableBody');
+      if (!tbody) return;
+
+      const statusFilter = document.getElementById('adminRequestStatusFilter')?.value || 'ALL';
+      const search = document.getElementById('adminRequestSearch')?.value.toLowerCase() || '';
+
+      let filtered = requests;
+      if (statusFilter !== 'ALL') filtered = filtered.filter(r => r.status === statusFilter);
+      if (search) {
+        filtered = filtered.filter(r => 
+          r.id.toLowerCase().includes(search) ||
+          r.customerName.toLowerCase().includes(search) ||
+          r.customerPhone.includes(search) ||
+          r.district.toLowerCase().includes(search) ||
+          r.category.toLowerCase().includes(search)
+        );
+      }
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="py-8 text-center text-xs text-gray-400">No requests found.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(r => {
+        let badgeClass = 'bg-gray-100 text-gray-800';
+        if (r.status === 'Pending') badgeClass = 'bg-amber-100 text-amber-800';
+        if (r.status === 'Matched') badgeClass = 'bg-blue-100 text-blue-800';
+        if (r.status === 'In Progress') badgeClass = 'bg-purple-100 text-purple-800';
+        if (r.status === 'Completed') badgeClass = 'bg-emerald-100 text-emerald-800';
+
+        const assignedWorker = workers.find(w => w.id === r.assignedWorkerId);
+        const whatsappMsgCustomer = `Hello ${r.customerName}, your Navithya request (${r.id}) for ${r.category} has been matched! Your verified provider is ${assignedWorker ? (assignedWorker.companyName || assignedWorker.name) : ''} (Tel: ${assignedWorker ? assignedWorker.phone : ''}). He will contact you shortly.`;
+
+        return `
+          <tr class="hover:bg-gray-50/80 transition-colors">
+            <td class="py-3.5 px-4 font-mono text-xs">
+              <div class="font-bold text-gray-900">${r.id}</div>
+              <div class="text-[10px] text-gray-400">${r.date}</div>
+            </td>
+            <td class="py-3.5 px-4">
+              <div class="font-bold text-gray-900 text-xs">${r.customerName}</div>
+              <div class="text-xs text-blue-600 font-medium">${r.customerPhone}</div>
+            </td>
+            <td class="py-3.5 px-4">
+              <div class="font-bold text-xs text-gray-900">${r.category}</div>
+              <div class="text-[11px] text-gray-500 truncate max-w-xs">${r.title}</div>
+            </td>
+            <td class="py-3.5 px-4 text-xs">
+              <div class="font-bold text-gray-800">${r.district}</div>
+              <div class="text-gray-400 text-[11px]">${r.city}</div>
+            </td>
+            <td class="py-3.5 px-4">
+              <select onchange="adminUpdateStatus('${r.id}', this.value)" class="text-[11px] font-bold px-2 py-1 rounded-lg border ${badgeClass}">
+                <option value="Pending" ${r.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                <option value="Matched" ${r.status === 'Matched' ? 'selected' : ''}>Matched</option>
+                <option value="In Progress" ${r.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+                <option value="Completed" ${r.status === 'Completed' ? 'selected' : ''}>Completed</option>
+              </select>
+            </td>
+            <td class="py-3.5 px-4 text-xs">
+              ${assignedWorker ? `
+                <div class="font-bold text-emerald-700 flex items-center gap-1">
+                  <i data-lucide="check" class="w-3.5 h-3.5"></i> ${assignedWorker.companyName || assignedWorker.name}
+                </div>
+                <div class="text-[10px] text-gray-500">${assignedWorker.phone}</div>
+                ${r.assignedTeamMember ? `<div class="text-[10px] font-bold text-blue-600">Tech: ${r.assignedTeamMember}</div>` : ''}
+              ` : `
+                <span class="text-amber-600 text-[11px] font-semibold italic">Unassigned</span>
+              `}
+            </td>
+            <td class="py-3.5 px-4 text-right space-x-1 whitespace-nowrap">
+              <button onclick="openAssignModal('${r.id}')" class="py-1 px-2.5 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 hover:bg-blue-100">
+                ${assignedWorker ? 'Reassign' : 'Assign'}
+              </button>
+              ${assignedWorker ? `
+                <a href="https://wa.me/94${r.customerPhone.replace(/^0/, '')}?text=${encodeURIComponent(whatsappMsgCustomer)}" target="_blank" 
+                   class="inline-block py-1 px-2 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200">
+                  <i data-lucide="send" class="w-3 h-3 inline"></i> WhatsApp
+                </a>
+              ` : ''}
+              <button onclick="deleteBookingRequest('${r.id}')" title="Delete Request" class="py-1 px-2 rounded-lg text-xs font-bold text-red-600 hover:bg-red-50">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5 inline"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function adminUpdateStatus(reqId, newStatus) {
+      const req = requests.find(r => r.id === reqId);
+      if (req) {
+        req.status = newStatus;
+        saveState();
+        renderAdminDashboard();
+        showToast('Updated', `Request ${reqId} set to ${newStatus}`);
+      }
+    }
+
+    function openAssignModal(reqId) {
+      currentAssignRequestId = reqId;
+      const req = requests.find(r => r.id === reqId);
+      if (!req) return;
+
+      document.getElementById('assignModalTitle').textContent = `Assign Provider to ${req.id} (${req.category})`;
+      document.getElementById('assignModalSub').textContent = `Customer: ${req.customerName} in ${req.city}, ${req.district}`;
+
+      const container = document.getElementById('assignWorkerList');
+      
+      // Sort: 1) Same district & same trade, 2) Same trade other district, 3) Others
+      const displayList = workers
+        .filter(w => !w.banned)
+        .sort((a, b) => {
+          const aMatch = (a.category === req.category ? 2 : 0) + (a.district === req.district ? 2 : 0);
+          const bMatch = (b.category === req.category ? 2 : 0) + (b.district === req.district ? 2 : 0);
+          return bMatch - aMatch;
+        });
+
+      container.innerHTML = displayList.map(w => {
+        const isExactTrade = w.category === req.category;
+        const isExactDistrict = w.district === req.district;
+        const teamMembers = w.team || [];
+
+        return `
+          <div class="p-3.5 rounded-2xl border ${isExactDistrict && isExactTrade ? 'border-emerald-300 bg-emerald-50/40' : (isExactTrade ? 'border-blue-200 bg-blue-50/30' : 'border-gray-200 bg-white')} space-y-2">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full ${w.verified ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-700'} flex items-center justify-center font-bold text-sm">
+                  ${(w.companyName || w.name).charAt(0)}
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-sm font-bold text-gray-900">${w.companyName || w.name}</span>
+                    ${isExactDistrict ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-black bg-emerald-100 text-emerald-800 border border-emerald-300">📍 Local Match: ${req.district}</span>` : `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-gray-100 text-gray-600">${w.district}</span>`}
+                    ${w.verified ? '<span class="badge-verified px-1.5 py-0.2 rounded text-[10px] font-bold">NIC Verified</span>' : '<span class="text-[10px] text-amber-600 bg-amber-50 px-1 rounded">Unverified</span>'}
+                  </div>
+                  <div class="text-xs text-gray-600">${w.category} • Rate: ${w.rate}</div>
+                  <div class="text-[10px] text-gray-400">Lead: ${w.name} | Tel: ${w.phone}</div>
+                </div>
+              </div>
+
+              <button onclick="confirmWorkerAssignment('${w.id}', '${w.companyName || w.name}', null)" class="py-1.5 px-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm shrink-0">
+                Assign Lead
+              </button>
+            </div>
+
+            ${teamMembers.length > 0 ? `
+              <div class="pl-12 pt-2 border-t border-gray-100 flex flex-wrap items-center gap-2">
+                <span class="text-[11px] font-bold text-gray-500">Or dispatch team tech:</span>
+                ${teamMembers.map(tm => `
+                  <button onclick="confirmWorkerAssignment('${w.id}', '${w.companyName || w.name}', '${tm.name} (${tm.role})')" 
+                          class="py-1 px-2.5 rounded-lg bg-blue-100 hover:bg-blue-200 text-blue-800 text-xs font-bold transition-all">
+                    👨‍🔧 ${tm.name} (${tm.role})
+                  </button>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('assignWorkerModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeAssignWorkerModal() {
+      document.getElementById('assignWorkerModal').classList.add('hidden');
+      currentAssignRequestId = null;
+    }
+
+    function confirmWorkerAssignment(workerId, workerName, teamMember) {
+      if (!currentAssignRequestId) return;
+      const req = requests.find(r => r.id === currentAssignRequestId);
+      const worker = workers.find(w => w.id === workerId);
+      if (req && worker) {
+        req.assignedWorkerId = workerId;
+        req.assignedWorkerName = workerName;
+        req.assignedTeamMember = teamMember || null;
+        req.status = 'Matched';
+        saveState();
+        closeAssignWorkerModal();
+        renderAdminDashboard();
+        showToast('Provider Assigned', `${workerName} assigned to ${req.id}`);
+
+        // Direct WhatsApp dispatch message to worker
+        const dispatchMsg = `Hello ${workerName}, Navithya Admin has assigned a new job to your company! Job ID: ${req.id}, Service: ${req.category}, Customer: ${req.customerName} (${req.customerPhone}), Location: ${req.city}, ${req.district}. Problem: "${req.title}". ${teamMember ? 'Assigned Tech: ' + teamMember : ''}`;
+        window.open(`https://wa.me/94${worker.phone.replace(/^0/, '')}?text=${encodeURIComponent(dispatchMsg)}`, '_blank');
+      }
+    }
+
+    // --- Admin Worker Management, Team Assignment & Unban Action ---
+    function renderAdminWorkers() {
+      const tbody = document.getElementById('adminWorkersTableBody');
+      if (!tbody) return;
+
+      const catFilter = document.getElementById('adminWorkerCategoryFilter')?.value || 'ALL';
+      let filtered = workers;
+      if (catFilter !== 'ALL') filtered = filtered.filter(w => w.category === catFilter);
+
+      tbody.innerHTML = filtered.map(w => {
+        const teamCount = (w.team || []).length;
+        const compCount = w.complaintsCount || 0;
+
+        return `
+          <tr class="hover:bg-gray-50/80 transition-colors ${w.banned ? 'bg-red-50/60' : ''}">
+            <td class="py-3 px-4">
+              <div class="font-black text-gray-900 text-xs">${w.companyName || w.name}</div>
+              <div class="text-[11px] text-gray-500">Lead: ${w.name} | ${w.district}</div>
+            </td>
+            <td class="py-3 px-4 text-xs font-bold text-gray-800">${w.category}</td>
+            <td class="py-3 px-4 text-xs">
+              <div class="font-mono text-gray-700">${w.nic}</div>
+              <div class="text-blue-600 font-medium">${w.phone}</div>
+            </td>
+            <td class="py-3 px-4 text-xs">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700">
+                👨‍🔧 ${teamCount} Techs
+              </span>
+            </td>
+            <td class="py-3 px-4 text-xs">
+              ${w.banned ? `
+                <span class="badge-banned px-2 py-0.5 rounded text-[10px] font-black inline-flex items-center gap-1">
+                  🚫 BANNED (${compCount} Complaints)
+                </span>
+              ` : `
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${compCount >= 3 ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-700'}">
+                  ${compCount} Complaints
+                </span>
+              `}
+            </td>
+            <td class="py-3 px-4 text-right space-x-1 whitespace-nowrap">
+              <!-- Unban or Manual Ban Button -->
+              ${w.banned ? `
+                <button onclick="adminUnbanWorker('${w.id}')" class="py-1 px-2.5 rounded-lg text-xs font-black bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-sm">
+                  ✓ Remove Ban (Unban)
+                </button>
+              ` : `
+                <button onclick="adminToggleBanWorker('${w.id}')" class="py-1 px-2 rounded-lg text-xs font-bold bg-red-100 text-red-700 hover:bg-red-200">
+                  Ban
+                </button>
+              `}
+              
+              <!-- Admin Add Team Member directly to this provider -->
+              <button onclick="openAdminAddTeamModal('${w.id}')" title="Add Crew Tech" class="py-1 px-2.5 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 hover:bg-blue-100">
+                + Team
+              </button>
+
+              <button onclick="toggleWorkerVerification('${w.id}')" class="py-1 px-2 rounded-lg text-xs font-bold ${w.verified ? 'bg-amber-50 text-amber-800 hover:bg-amber-100' : 'bg-emerald-600 text-white hover:bg-emerald-700'}">
+                ${w.verified ? 'Revoke' : 'Verify'}
+              </button>
+
+              <button onclick="deleteWorkerAccount('${w.id}')" title="Delete Provider" class="py-1 px-2 rounded-lg text-xs font-bold text-red-600 hover:bg-red-50">
+                <i data-lucide="trash-2" class="w-3.5 h-3.5 inline"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+      lucide.createIcons();
+    }
+
+    function adminUnbanWorker(workerId) {
+      const w = workers.find(item => item.id === workerId);
+      if (w) {
+        w.banned = false;
+        // Optionally reset complaints count on admin pardon
+        w.complaintsCount = 0;
+        saveState();
+        renderAdminWorkers();
+        renderAdminDashboard();
+        if (loggedInWorker && loggedInWorker.id === workerId) renderWorkerDashboard();
+        showToast('Account Unbanned!', `${w.companyName || w.name} has been unbanned and restored.`);
+      }
+    }
+
+    function adminToggleBanWorker(workerId) {
+      const w = workers.find(item => item.id === workerId);
+      if (w) {
+        w.banned = true;
+        saveState();
+        renderAdminWorkers();
+        renderAdminDashboard();
+        if (loggedInWorker && loggedInWorker.id === workerId) renderWorkerDashboard();
+        showToast('Provider Suspended', `${w.companyName || w.name} has been placed under suspension.`);
+      }
+    }
+
+    // Admin Add Team Member Modal
+    function openAdminAddTeamModal(workerId) {
+      const w = workers.find(item => item.id === workerId);
+      if (!w) return;
+      document.getElementById('adminTargetWorkerId').value = workerId;
+      document.getElementById('adminAddTeamModalTitle').textContent = `Add Crew Tech to ${w.companyName || w.name}`;
+      document.getElementById('adminAddTeamModal').classList.remove('hidden');
+      lucide.createIcons();
+    }
+    function closeAdminAddTeamModal() {
+      document.getElementById('adminAddTeamModal').classList.add('hidden');
+    }
+
+    function handleAdminSubmitTeamMember(e) {
+      e.preventDefault();
+      const workerId = document.getElementById('adminTargetWorkerId').value;
+      const name = document.getElementById('adminTeamMemberName').value.trim();
+      const nic = document.getElementById('adminTeamMemberNic').value.trim();
+      const phone = document.getElementById('adminTeamMemberPhone').value.trim();
+      const role = document.getElementById('adminTeamMemberRole').value.trim();
+
+      const w = workers.find(item => item.id === workerId);
+      if (w) {
+        if (!w.team) w.team = [];
+        w.team.push({ id: 'tm-' + (w.team.length + 1), name, nic, phone, role });
+        saveState();
+        closeAdminAddTeamModal();
+        renderAdminWorkers();
+        showToast('Crew Member Assigned', `${name} assigned to ${w.companyName || w.name}`);
+      }
+    }
+
+    function toggleWorkerVerification(workerId) {
+      const w = workers.find(item => item.id === workerId);
+      if (w) {
+        w.verified = !w.verified;
+        saveState();
+        renderAdminWorkers();
+        renderAdminDashboard();
+        showToast('Status Updated', `${w.companyName || w.name} is now ${w.verified ? 'NIC Verified' : 'Unverified'}`);
+      }
+    }
+
+    function deleteWorkerAccount(workerId) {
+      const w = workers.find(item => item.id === workerId);
+      if (!confirm(`Delete provider "${w ? (w.companyName || w.name) : workerId}"?`)) return;
+      workers = workers.filter(item => item.id !== workerId);
+      saveState();
+      renderAdminWorkers();
+      renderAdminDashboard();
+      showToast('Deleted', `Provider removed.`);
+    }
+
+    // --- Admin Complaints Desk ---
+    function renderAdminComplaints() {
+      const tbody = document.getElementById('adminComplaintsTableBody');
+      if (!tbody) return;
+
+      if (complaints.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-xs text-gray-400">No customer complaints logged.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = complaints.map(c => `
+        <tr class="hover:bg-gray-50/80 transition-colors">
+          <td class="py-3 px-4 font-mono text-xs">
+            <div class="font-bold text-rose-700">${c.id}</div>
+            <div class="text-[10px] text-gray-400">${c.date}</div>
+          </td>
+          <td class="py-3 px-4 text-xs">
+            <div class="font-bold text-gray-900">${c.name}</div>
+            <div class="text-blue-600">${c.phone}</div>
+          </td>
+          <td class="py-3 px-4 text-xs">
+            <div class="font-bold text-gray-800">${c.workerName}</div>
+            <div class="text-[11px] text-gray-400">${c.category}</div>
+          </td>
+          <td class="py-3 px-4 text-xs text-gray-600 max-w-xs truncate">${c.details}</td>
+          <td class="py-3 px-4 text-xs">
+            <select onchange="updateComplaintStatus('${c.id}', this.value)" class="px-2 py-1 border rounded-lg text-xs font-bold ${c.status === 'Resolved' ? 'bg-emerald-50 text-emerald-800' : 'bg-amber-50 text-amber-800'}">
+              <option value="Under Review" ${c.status === 'Under Review' ? 'selected' : ''}>Under Review</option>
+              <option value="Investigating" ${c.status === 'Investigating' ? 'selected' : ''}>Investigating</option>
+              <option value="Resolved" ${c.status === 'Resolved' ? 'selected' : ''}>Resolved</option>
+            </select>
+          </td>
+          <td class="py-3 px-4 text-right whitespace-nowrap">
+            <a href="https://wa.me/94${c.phone.replace(/^0/, '')}?text=Hello%20${encodeURIComponent(c.name)},%20Navithya%20Management%20is%20contacting%20you%20regarding%20complaint%20${c.id}" target="_blank" class="py-1 px-2.5 bg-emerald-600 text-white rounded-lg text-xs font-bold inline-flex items-center gap-1">
+              <i data-lucide="message-circle" class="w-3 h-3"></i> WhatsApp
+            </a>
+          </td>
+        </tr>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function updateComplaintStatus(compId, newStatus) {
+      const c = complaints.find(item => item.id === compId);
+      if (c) {
+        c.status = newStatus;
+        if (newStatus === 'Resolved') c.resolutionNotes = 'Complaint resolved by Admin.';
+        saveState();
+        renderAdminComplaints();
+        renderComplaintList();
+        showToast('Complaint Updated', `Ticket ${compId} marked as ${newStatus}`);
+      }
+    }
+
+    // Manual Add Provider
+    function openAddWorkerModal() {
+      document.getElementById('addWorkerModal').classList.remove('hidden');
+    }
+    function closeAddWorkerModal() {
+      document.getElementById('addWorkerModal').classList.add('hidden');
+    }
+
+    function handleAdminAddWorker(e) {
+      e.preventDefault();
+      const companyName = document.getElementById('adminNewWorkerCompany').value.trim();
+      const name = document.getElementById('adminNewWorkerName').value.trim();
+      const nic = document.getElementById('adminNewWorkerNic').value.trim();
+      const phone = document.getElementById('adminNewWorkerPhone').value.trim();
+      const category = document.getElementById('adminNewWorkerCategory').value;
+      const district = document.getElementById('adminNewWorkerDistrict').value;
+      const verified = document.getElementById('adminNewWorkerVerified').checked;
+
+      const newW = {
+        id: 'w-' + (workers.length + 1),
+        companyName: companyName || name,
+        name,
+        nic,
+        phone,
+        category,
+        district,
+        rate: 'Negotiable',
+        experience: '3',
+        verified,
+        available: true,
+        subscriptionStatus: 'trial',
+        subscriptionPlan: 'Monthly Pro (2-Month Free Trial)',
+        trialEnds: getFutureDate(60),
+        banned: false,
+        complaintsCount: 0,
+        team: [],
+        rating: 5.0,
+        jobsCompleted: 0
+      };
+
+      workers.unshift(newW);
+      saveState();
+      closeAddWorkerModal();
+      renderAdminWorkers();
+      renderAdminDashboard();
+      showToast('Provider Added', `${companyName || name} added to directory.`);
+    }
+
+    function exportDataJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({ workers, requests, reviews, complaints }, null, 2));
+      const dlAnchorElem = document.createElement('a');
+      dlAnchorElem.setAttribute("href", dataStr);
+      dlAnchorElem.setAttribute("download", `navithya_backup_${new Date().toISOString().slice(0, 10)}.json`);
+      dlAnchorElem.click();
+      showToast('Export Completed', 'System data exported to JSON.');
+    }
+
+    function showToast(title, msg) {
+      const toast = document.getElementById('toastNotification');
+      if (!toast) return;
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastMessage').textContent = msg;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      setTimeout(() => toast.classList.add('translate-y-24', 'opacity-0'), 4000);
+    }
+  </script>
+
+</body>
+</html>
